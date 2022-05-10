@@ -21,3 +21,7 @@ First, I concated concatenate the sheets `Operating`, `Planned`, and `Retired` a
 - Coal Integrated Gasification Combined Cycle, Conventional Steam Coal &rarr; `Coal`
 - Landfills, Municipal Solid Waste &rarr; `Landfills & Municipal Solid Waste`
 - Flywheels, Other Gases, All Other &rarr; `Other`
+
+and to give full names for state abbreviations:
+
+- AZ &rarr; `Arizona`
