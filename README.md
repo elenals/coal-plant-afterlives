@@ -12,16 +12,12 @@ The most recent annual dataset is from 2020, so I am using a monthly dataset fro
 
 First, I concated concatenate the sheets `Operating`, `Planned`, and `Retired` and deleted unnecessary columns. Then, I used [OpenRefine](https://openrefine.org/download.html) to group technology into types:
 
-- `Wood/Wood Waste Biomass`, `Other Waste Biomass` &rarr; `Biomass`
-- `Solar Thermal with Energy Storage`, `Solar Thermal without Energy Storage`, and `Solar Photovoltaic` &rarr; `Solar`
-- `Onshore Wind Turbine`, `Offshore Wind Turbine` &rarr; `Wind Turbine`
-- `Hydroelectric Pumped Storage`, `Conventional Hydroelectric` &rarr; `Hydroelectric`
-- `Petroleum Coke`, `Petroleum Liquids` &rarr; `Petroleum Coke & Liquids`
-- `Natural Gas with Compressed Air Storage`, `Natural Gas Fired Combustion Turbine`, `Natural Gas Fired Combined Cycle`, `Natural Gas Steam Turbine`, `Natural Gas Internal Combustion Engine`, `Other Natural Gas` &rarr; `Natural Gas`
-- `Coal Integrated Gasification Combined Cycle`, `Conventional Steam Coal` &rarr; `Coal`
-- `Landfills`, `Municipal Solid Waste` &rarr; `Landfills & Municipal Solid Waste`
-- `Flywheels`, `Other Gases`, `All Other` &rarr; `Other`
-
-and to give full names for state abbreviations:
-
-- `AZ` &rarr; `Arizona`
+- Wood/Wood Waste Biomass, Other Waste Biomass &rarr; `Biomass`
+- Solar Thermal with Energy Storage, Solar Thermal without Energy Storage, and Solar Photovoltaic &rarr; `Solar`
+- Onshore Wind Turbine, Offshore Wind Turbine &rarr; `Wind Turbine`
+- Hydroelectric Pumped Storage, Conventional Hydroelectric &rarr; `Hydroelectric`
+- Petroleum Coke, Petroleum Liquids &rarr; `Petroleum Coke & Liquids`
+- Natural Gas with Compressed Air Storage, Natural Gas Fired Combustion Turbine, Natural Gas Fired Combined Cycle, Natural Gas Steam Turbine, Natural Gas Internal Combustion Engine, Other Natural Gas &rarr; `Natural Gas`
+- Coal Integrated Gasification Combined Cycle, Conventional Steam Coal &rarr; `Coal`
+- Landfills, Municipal Solid Waste &rarr; `Landfills & Municipal Solid Waste`
+- Flywheels, Other Gases, All Other &rarr; `Other`
