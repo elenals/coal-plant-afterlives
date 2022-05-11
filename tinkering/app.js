@@ -9,7 +9,7 @@ const mMap = { top: 20, right: 20, bottom: 20, left: 20 };
 CREATING EMPTY SVG ROOT ELEMENT ON PAGE LOAD 
 */
 const svg = d3
-	.select("#container")
+	.select("#map-container")
 	.append("svg")
 	.attr("width", wMap)
 	.attr("height", hMap);
@@ -34,7 +34,15 @@ function makeMap(data) {
 		.data(states.features)
 		.join("path")
 		.attr("d", path)
-		.attr("class", "state-border");
+		.attr("class", "states");
+}
+
+function colorPoint(d) {
+	if (d.TYPE === "Coal") {
+		return "#c5283d";
+	} else {
+		return "#495057";
+	}
 }
 
 /*
@@ -53,18 +61,18 @@ function plotPoints(data) {
 	let tooltip = d3
 		.select("body")
 		.append("div")
-		.attr("id", "tooltip")
+		.attr("class", "tooltip")
 		.classed("hidden", true);
 
 	let mouseover = function (event, d) {
-		d3.select("#tooltip")
+		d3.select(".tooltip")
 			.html(
 				`<p>
         <b>${d.ENTITY_NAME}</b> in ${d.COUNTY}, ${d.STATE_NAME}
+        <hr color="#ced4da" height="1px"></p>
+        <p><i>${d.TECHNOLOGY}</i></p>
         <br>
-        <i>${d.TECHNOLOGY}</i>
-        <br><br>
-        <b>Operating Since:</b> ${d.OP_YEAR}
+        <p><b>Operating Since:</b> ${d.OP_YEAR}
         <br>
         <b>Retirement Year:</b> ${d.RETIREMENT_YEAR}
         <br>
@@ -77,11 +85,11 @@ function plotPoints(data) {
 			.duration(300)
 			.style("opacity", 1);
 
-		d3.select("#tooltip").classed("hidden", false);
+		d3.select(".tooltip").classed("hidden", false);
 	};
 
 	let mouseout = function (event, d) {
-		d3.select("#tooltip").transition().duration(300).style("opacity", 0);
+		d3.select(".tooltip").transition().duration(300).style("opacity", 0);
 	};
 
 	points = svg
@@ -92,6 +100,7 @@ function plotPoints(data) {
 		.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
 		.attr("r", (d) => size(d.CAPACITY_MW))
 		.attr("class", "point")
+		.style("fill", (d) => colorPoint(d))
 		.on("mouseover", mouseover)
 		.on("mouseout", mouseout);
 }

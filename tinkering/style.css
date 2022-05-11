@@ -1,70 +1,65 @@
 h1 {
-  font-family: 'Spectral', serif;
-  font-weight: 800;
+	font-family: "Spectral", serif;
+	font-weight: 800;
 }
 
 h3 {
-  font-family: 'IBM Plex Mono', monospace;
-  font-weight: 600;
+	font-family: "IBM Plex Mono", monospace;
+	font-weight: 600;
 }
 
 body {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 14px;
+	font-family: "IBM Plex Mono", monospace;
+	font-size: 14px;
 }
 
-.state-border {
-  fill: #fff0f3;
-  stroke: #ffb3c1;
-  stroke-width: 1px;
+.tooltip {
+	position: absolute;
+	padding: 10px;
+	border-radius: 3px;
+	width: 200px;
+	background-color: #f8f9fa;
+	box-shadow: 0px 0px 5px #adb5bd;
+	pointer-events: none;
+	stroke: black;
+}
+
+.tooltip p {
+	font-family: "IBM Plex Mono", monospace;
+	margin: 0;
+	font-size: 12px;
+}
+
+.tooltip.hidden {
+	display: none;
+}
+
+.states {
+	fill: #f8f9fa;
+	stroke: #dee2e6;
+	stroke-width: 1px;
 }
 
 .point {
-  fill:#800f2f;
-  opacity: 0.6;
+	fill: #495057;
+	opacity: 0.5;
 }
 
 .point:hover {
-  transition: 300;
-  fill: #ff4d6d;
-  opacity: 1;
+	fill: #ff4d6d;
+	opacity: 1;
 }
 
 .point.hidden {
-  display: none;
+	display: none;
 }
 
-.bar {
-  fill:#c9184a;
-}
-
-#container {
-  text-align: center;
-  padding: 20px 20px 20px 20px;
-}
-
-#tooltip {
-  position: absolute;
-  padding: 10px;
-  border-radius: 3px;
-  width: 200px;
-  background-color: #f8f9fa;
-  box-shadow: 0px 0px 5px #adb5bd;
-  pointer-events: none;
-  stroke: black;
-}
-
-#tooltip p {
-  font-family: 'IBM Plex Mono', monospace;
-  margin: 0;
-  font-size: 12px;
-}
-
-#tooltip.hidden {
-  display: none;
+#map-container {
+	text-align: center;
+	padding: 20px 20px 20px 20px;
 }
 
 #slider {
-  margin: 0 auto;
-  padding: 0px;
+	margin: 0 auto;
+	padding: 0px;
 }
