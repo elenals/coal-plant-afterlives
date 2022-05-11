@@ -37,22 +37,20 @@ function makeMap(data) {
 		.attr("class", "states");
 }
 
+/*
+PLOT POINTS & TOOLTIP
+*/
 function colorPoint(d) {
-	if (d.TYPE === "Coal") {
-		return "#c5283d";
-	} else {
+	if (d.RETIREMENT_YEAR === "") {
 		return "#495057";
 	}
 }
 
-/*
-PLOT POINTS & TOOLTIP
-*/
 function plotPoints(data) {
-	let selection = document.querySelector("#slider").value;
-	d3.select("#year").text(selection);
+	//let selection = document.querySelector("#slider").value;
+	//d3.select("#year").text(selection);
 
-	let filtered = data.filter((d) => d.RETIREMENT_YEAR == selection);
+	//let filtered = data.filter((d) => d.RETIREMENT_YEAR == selection);
 	let size = d3
 		.scaleLinear()
 		.domain(d3.extent(data, (d) => d.CAPACITY_MW))
@@ -94,7 +92,7 @@ function plotPoints(data) {
 
 	points = svg
 		.selectAll(".point")
-		.data(filtered)
+		.data(data)
 		.join("circle")
 		.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
 		.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
@@ -126,9 +124,11 @@ d3.json("data/counties-10m.json").then((data, error) => {
 				plotPoints(data);
 
 				// plotting new points based on the input from the slider
-				d3.select("#slider").on("input", function () {
+				/*
+        d3.select("#slider").on("input", function () {
 					plotPoints(data);
 				});
+        */
 			}
 		});
 	}
