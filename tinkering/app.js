@@ -47,14 +47,10 @@ function colorPoint(d) {
 }
 
 function plotPoints(data) {
-	//let selection = document.querySelector("#slider").value;
-	//d3.select("#year").text(selection);
-
-	//let filtered = data.filter((d) => d.RETIREMENT_YEAR == selection);
 	let size = d3
 		.scaleLinear()
 		.domain(d3.extent(data, (d) => d.CAPACITY_MW))
-		.range([3, 15]);
+		.range([3, 8]);
 
 	let tooltip = d3
 		.select("body")
@@ -66,8 +62,7 @@ function plotPoints(data) {
 		d3.select(".tooltip")
 			.html(
 				`<p>
-        <b>${d.ENTITY_NAME}</b> in ${d.COUNTY}, ${d.STATE_NAME}
-        <hr color="#ced4da" height="1px"></p>
+        <b>${d.ENTITY_NAME}</b> in ${d.COUNTY}, ${d.STATE_NAME}</p>
         <p><i>${d.TECHNOLOGY}</i></p>
         <br>
         <p><b>Operating Since:</b> ${d.OP_YEAR}
@@ -119,16 +114,10 @@ d3.json("data/counties-10m.json").then((data, error) => {
 			if (error) {
 				console.log(log);
 			} else {
-				console.log("power plants data", data);
-				// plot first year's data on page load
-				plotPoints(data);
-
-				// plotting new points based on the input from the slider
-				/*
-        d3.select("#slider").on("input", function () {
-					plotPoints(data);
+				let filtered = data.filter((d) => {
+					return projection([+d.LNG, +d.LAT]) != null && d.TYPE === "Coal";
 				});
-        */
+				plotPoints(filtered);
 			}
 		});
 	}
