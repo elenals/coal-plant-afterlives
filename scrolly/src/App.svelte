@@ -50,13 +50,12 @@
 	};
 
 	const stepOne = function () {
-		//console.log(currentStep);
-		pointColor = "black";
+		pointColor = "pink";
 	};
 
 	const stepTwo = function () {
 		//console.log(currentStep);
-		pointColor = "red";
+		pointColor = "purple";
 	};
 
 	/* run code reactively
@@ -74,7 +73,6 @@
 	they will be first available inside onMount: */
 	onMount(async () => {
 		const svg = d3.select("svg").attr("width", w).attr("height", h);
-		//makeMap(topo, svg);
 	});
 </script>
 
@@ -102,7 +100,7 @@
 				<path d={path(g)} class="states" />
 			{/each}
 
-			{#each filtered as d, i}
+			{#each filtered as d}
 				<circle
 					cx={projection([+d.LNG, +d.LAT])[0]}
 					cy={projection([+d.LNG, +d.LAT])[1]}
