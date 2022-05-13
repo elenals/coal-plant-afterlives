@@ -6,7 +6,7 @@
 	/* import d3
 	make sure to run "npm install d3" to install the d3 dependency */
 	import * as d3 from "d3";
-	import data from "data/counties-10m.json";
+	import data from "./assets/counties-10m.json";
 	import { onMount } from "svelte";
 	import { feature } from "topojson";
 
@@ -18,6 +18,7 @@
 	/* define a MAP PROJECTION and a PATH GENERATOR */
 	const projection = d3.geoAlbersUsa().translate([w / 2, h / 2]);
 	const path = d3.geoPath().projection(projection);
+	console.log(data);
 </script>
 
 <section>
