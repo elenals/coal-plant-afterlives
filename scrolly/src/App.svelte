@@ -65,6 +65,7 @@
 
 	const stepOne = function () {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		pointColor = "pink";
 	};
 
@@ -84,6 +85,20 @@
 	};
 
 	const stepTwo = function () {
+=======
+		d3.select("svg")
+			.selectAll(".point")
+			.style("fill", (d) => {
+				if (d.RETIREMENT_YEAR <= "2021" && d.RETIREMENT_YEAR != "") {
+					return colorB;
+				} else {
+					return colorA;
+				}
+			});
+	};
+
+	const stepTwo = function () {
+>>>>>>> scrolly
 		d3.select("svg")
 			.selectAll(".point")
 			.style("fill", (d) => {
@@ -95,6 +110,9 @@
 					return colorA;
 				}
 			});
+<<<<<<< HEAD
+>>>>>>> scrolly
+=======
 >>>>>>> scrolly
 	};
 
@@ -109,12 +127,15 @@
 		stepTwo();
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 	/* if you need access to DOM elements inside the component, 
 	they will be first available inside onMount: */
 	onMount(async () => {
 		const svg = d3.select("svg").attr("width", w).attr("height", h);
 	});
+=======
+>>>>>>> scrolly
 =======
 >>>>>>> scrolly
 </script>
@@ -144,8 +165,11 @@
 			{/each}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 			{#each filtered as d}
 =======
+=======
+>>>>>>> scrolly
 			<!--
 			{#each filtered as d, i}
 >>>>>>> scrolly
