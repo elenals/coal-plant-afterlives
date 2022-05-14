@@ -19,6 +19,24 @@
 	let w = 840;
 	let h = 640;
 	let m = { top: 20, right: 20, bottom: 20, left: 20 };
+	const colorA = "#495057";
+	const colorB = "#38a3a5";
+	const colorC = "#e55c90";
+
+	/* if you need access to DOM elements inside the component, 
+	they will be first available inside onMount: */
+	onMount(async () => {
+		let svg = d3.select("svg").attr("width", w).attr("height", h);
+		let points = svg
+			.selectAll(".point")
+			.data(filtered)
+			.join("circle")
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("r", 4)
+			.attr("class", "point")
+			.style("fill", colorA);
+	});
 
 	/* define a MAP PROJECTION and a PATH GENERATOR */
 	const projection = d3.geoAlbersUsa().translate([w / 2, h / 2]);
@@ -38,25 +56,37 @@
 	const steps = [
 		"<p>All coal plants in the U.S.</p>",
 		"<p>Coal plants that have been retired, as of 2022.</p>",
-		"<p>Coal plants that will be retired by 2050./p>",
+		"<p>Coal plants that will be retired by 2050.</p>",
 	];
 
-	/* tweening values */
-	let pointColor;
-
 	const stepZero = function () {
-		//console.log(currentStep);
-		pointColor = "#495057";
+		d3.select("svg").selectAll(".point").style("fill", colorA);
 	};
 
 	const stepOne = function () {
-		//console.log(currentStep);
-		pointColor = "black";
+		d3.select("svg")
+			.selectAll(".point")
+			.style("fill", (d) => {
+				if (d.RETIREMENT_YEAR <= "2021" && d.RETIREMENT_YEAR != "") {
+					return colorB;
+				} else {
+					return colorA;
+				}
+			});
 	};
 
 	const stepTwo = function () {
-		//console.log(currentStep);
-		pointColor = "red";
+		d3.select("svg")
+			.selectAll(".point")
+			.style("fill", (d) => {
+				if (d.RETIREMENT_YEAR <= "2021" && d.RETIREMENT_YEAR != "") {
+					return colorB;
+				} else if (d.RETIREMENT_YEAR >= "2022") {
+					return colorC;
+				} else {
+					return colorA;
+				}
+			});
 	};
 
 	/* run code reactively
@@ -69,13 +99,6 @@
 	} else if (currentStep == 2) {
 		stepTwo();
 	}
-
-	/* if you need access to DOM elements inside the component, 
-	they will be first available inside onMount: */
-	onMount(async () => {
-		const svg = d3.select("svg").attr("width", w).attr("height", h);
-		//makeMap(topo, svg);
-	});
 </script>
 
 <svelte:head>
@@ -102,15 +125,17 @@
 				<path d={path(g)} class="states" />
 			{/each}
 
+			<!--
 			{#each filtered as d, i}
 				<circle
 					cx={projection([+d.LNG, +d.LAT])[0]}
 					cy={projection([+d.LNG, +d.LAT])[1]}
 					r={4}
 					class="point"
-					fill={pointColor}
+					fill={tweenedColor[i]}
 				/>
 			{/each}
+			-->
 		</svg>
 	</div>
 
