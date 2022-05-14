@@ -64,15 +64,6 @@
 	};
 
 	const stepOne = function () {
-<<<<<<< HEAD
-<<<<<<< HEAD
-		pointColor = "pink";
-	};
-
-	const stepTwo = function () {
-		//console.log(currentStep);
-		pointColor = "purple";
-=======
 		d3.select("svg")
 			.selectAll(".point")
 			.style("fill", (d) => {
@@ -85,20 +76,6 @@
 	};
 
 	const stepTwo = function () {
-=======
-		d3.select("svg")
-			.selectAll(".point")
-			.style("fill", (d) => {
-				if (d.RETIREMENT_YEAR <= "2021" && d.RETIREMENT_YEAR != "") {
-					return colorB;
-				} else {
-					return colorA;
-				}
-			});
-	};
-
-	const stepTwo = function () {
->>>>>>> scrolly
 		d3.select("svg")
 			.selectAll(".point")
 			.style("fill", (d) => {
@@ -110,10 +87,6 @@
 					return colorA;
 				}
 			});
-<<<<<<< HEAD
->>>>>>> scrolly
-=======
->>>>>>> scrolly
 	};
 
 	/* run code reactively
@@ -126,18 +99,6 @@
 	} else if (currentStep == 2) {
 		stepTwo();
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-	/* if you need access to DOM elements inside the component, 
-	they will be first available inside onMount: */
-	onMount(async () => {
-		const svg = d3.select("svg").attr("width", w).attr("height", h);
-	});
-=======
->>>>>>> scrolly
-=======
->>>>>>> scrolly
 </script>
 
 <svelte:head>
@@ -164,15 +125,8 @@
 				<path d={path(g)} class="states" />
 			{/each}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-			{#each filtered as d}
-=======
-=======
->>>>>>> scrolly
 			<!--
 			{#each filtered as d, i}
->>>>>>> scrolly
 				<circle
 					cx={projection([+d.LNG, +d.LAT])[0]}
 					cy={projection([+d.LNG, +d.LAT])[1]}
