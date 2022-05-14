@@ -4,8 +4,7 @@
 	import Scroll from "./Scrolly.svelte";
 	import { tweened } from "svelte/motion";
 
-	/* import d3
-	make sure to run "npm install d3" to install the d3 dependency */
+	/* import d3 and make sure to run "npm install d3" to install the d3 dependency */
 	import * as d3 from "d3";
 	import { onMount } from "svelte";
 	import * as topojson from "topojson";
