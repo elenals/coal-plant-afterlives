@@ -49,3 +49,83 @@ npm run dev
 ```
 
 ### Deploy
+
+To deploy the Svelte app with GitHub Pages, first create a `gh-pages` branch in the root of the repository.
+
+```bash
+git checkout -b "gh-pages"
+```
+
+After creating the static Svelte site, download the `gh-pages` package:
+
+```bash
+npm i gh-pages
+```
+
+After installation, create a new file called `gh-pages.js` at the root of the repository with the following contents:
+
+```js
+const ghpages = require("gh-pages");
+
+ghpages.publish(
+	"public", // path to public directory
+	{
+		branch: "gh-pages",
+		repo: "https://github.com/elenals/coal-plant-afterlives", // point to your repo on GitHub
+		user: {
+			name: "NAME",
+			email: "EMAIL",
+		},
+		dotfiles: true,
+	},
+	() => {
+		console.log("Deploy Complete!");
+	}
+);
+```
+
+Update the links in the index.html (located at `/public/index.html`) so that they are relative paths.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+		<title>Coal Plant Afterlives</title>
+
+		<link rel="icon" type="image/png" href="./favicon.png" />
+		<link rel="stylesheet" href="./global.css" />
+		<link rel="stylesheet" href="./build/bundle.css" />
+
+		<script defer src="./build/bundle.js"></script>
+	</head>
+
+	<body></body>
+</html>
+```
+
+In the `.gitignore` file, make sure to comment out the contents of the `/public/build/` directory.
+
+```
+/node_modules/
+# /public/build/
+
+.DS_Store
+```
+
+Now, build and deploy your Svelte application:
+
+```bash
+# Build
+npm run build
+
+# Commit and push changes
+git add .
+git add -m "commit message"
+git push origin gh-pages
+
+# Deploy
+node ./gh-pages.js
+```
