@@ -25,3 +25,27 @@ First, I concated concatenate the sheets `Operating`, `Planned`, and `Retired` a
 and to give full names for state abbreviations:
 
 - AZ &rarr; `Arizona`
+
+## Building & Deploying the Svelte App
+
+To create a new project based on the [Svelte template](https://github.com/sveltejs/template) using [degit](https://github.com/Rich-Harris/degit):
+
+```bash
+npx degit sveltejs/template svelte-app
+cd svelte-app
+```
+
+Install the dependencies
+
+```bash
+cd svelte-app
+npm install
+```
+
+and then start [Rollup](https://rollupjs.org) and navigate to [localhost:8080](http://localhost:8080), where you should see your app running.
+
+```bash
+npm run dev
+```
+
+### Deploy
