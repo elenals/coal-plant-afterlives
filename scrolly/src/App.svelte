@@ -12,7 +12,6 @@
 	/* import data */
 	import topo from "./assets/counties-10m.json"; // topojson data
 	import data from "./assets/power-plants-eia.json"; // power plant locations data
-	import { text } from "svelte/internal";
 
 	/* set up */
 	let w = 840;
@@ -123,18 +122,6 @@
 			{#each geo as g}
 				<path d={path(g)} class="states" />
 			{/each}
-
-			<!--
-			{#each filtered as d, i}
-				<circle
-					cx={projection([+d.LNG, +d.LAT])[0]}
-					cy={projection([+d.LNG, +d.LAT])[1]}
-					r={4}
-					class="point"
-					fill={tweenedColor[i]}
-				/>
-			{/each}
-			-->
 		</svg>
 	</div>
 
