@@ -129,3 +129,7 @@ git push origin gh-pages
 # Deploy
 node ./gh-pages.js
 ```
+
+If you had already set up GitHub pages previously, make sure to update the the Source to `/root` of the `gh-pages` Branch.
+
+This project's site is now published at: https://elenals.github.io/coal-plant-afterlives/.
