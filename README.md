@@ -48,6 +48,26 @@ and then start [Rollup](https://rollupjs.org) and navigate to [localhost:8080](h
 npm run dev
 ```
 
+### Requirements
+
+Install [d3](https://www.npmjs.com/package/d3):
+
+```bash
+npm install d3
+```
+
+Install [topojson](https://www.npmjs.com/package/topojson):
+
+```bash
+npm install topojson
+```
+
+Install [d3-gridding](https://github.com/romsson/d3-gridding):
+
+```bash
+npm install d3-gridding
+```
+
 ### Deploy
 
 To deploy the Svelte app with GitHub Pages, first create a `gh-pages` branch in the root of the repository.

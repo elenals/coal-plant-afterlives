@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "d3": "^7.4.4",
+    "d3-gridding": "^0.2.0",
     "gh-pages": "^4.0.0",
     "sirv-cli": "^2.0.0"
   }
