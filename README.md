@@ -53,13 +53,13 @@ npm run dev
 Install [d3](https://www.npmjs.com/package/d3):
 
 ```bash
-npm install d3
+npm install --save-dev d3
 ```
 
 Install [topojson](https://www.npmjs.com/package/topojson):
 
 ```bash
-npm install topojson
+npm install --save-dev topojson
 ```
 
 Install [svelte-image-gallery](https://www.npmjs.com/package/svelte-image-gallery):
