@@ -62,10 +62,10 @@ Install [topojson](https://www.npmjs.com/package/topojson):
 npm install topojson
 ```
 
-Install [d3-gridding](https://github.com/romsson/d3-gridding):
+Install [svelte-image-gallery](https://www.npmjs.com/package/svelte-image-gallery):
 
 ```bash
-npm install d3-gridding
+npm install --save-dev svelte-image-gallery
 ```
 
 ### Deploy
