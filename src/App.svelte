@@ -3,6 +3,7 @@
 	/*** IMPORTS ***/
 	/***************/
 	import Map from "./Map.svelte";
+	import Grid from "./Header.svelte";
 </script>
 
 <svelte:head>
@@ -21,4 +22,12 @@
 	/>
 </svelte:head>
 
+<Grid />
 <Map />
+
+<style>
+	:global(body) {
+		margin: 0px;
+		padding: 0px;
+	}
+</style>
