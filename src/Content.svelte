@@ -17,7 +17,7 @@
 			<h3>{subhed}</h3>
 		{/if}
 		{#if { content } != ""}
-			<p>{content}</p>
+			<p>{@html content}</p>
 		{/if}
 	</div>
 </section>
@@ -25,6 +25,7 @@
 <style>
 	section {
 		text-align: center;
+		justify-content: center;
 		width: 100vw;
 		overflow: hidden;
 	}
@@ -32,16 +33,30 @@
 	h1 {
 		text-align: center;
 		font-family: "Chivo", sans-serif;
-		font-size: 50px;
+		font-size: 4rem;
 		font-weight: 900;
+		width: 700px;
 	}
 
 	h2 {
 		text-align: center;
 		font-family: "Spline Sans Mono", monospace;
-		font-size: 18px;
+		font-size: 1rem;
 		font-weight: 400;
 		text-transform: uppercase;
+	}
+
+	h3 {
+		text-align: left;
+		font-family: "Chivo", sans-serif;
+		font-size: 2rem;
+		font-weight: 700;
+	}
+
+	p {
+		text-align: left;
+		font-family: "Spectral", serif;
+		font-size: 1.25rem;
 	}
 
 	a {
@@ -67,5 +82,11 @@
 	a:hover:after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
+	}
+
+	.container {
+		text-align: center;
+		width: 600px;
+		margin: auto;
 	}
 </style>
