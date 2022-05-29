@@ -20,7 +20,8 @@
 
 	/* importing data */
 	import topo from "./assets/counties-10m.json"; // topojson data
-	import data from "./assets/power-plants-eia.json"; // power plant locations data
+	import allData from "./assets/power-plants-eia.json"; // power plant locations data
+	const data = allData.filter((d) => d.TYPE === "Coal"); // just the coal plant data
 
 	/* SET-UP */
 
@@ -29,8 +30,8 @@
 	let currentStep;
 	let timer;
 	let label;
+	let legend;
 	let autoplay = true;
-	let points;
 
 	/* BASE MAP */
 
@@ -55,7 +56,8 @@
 	onMount(async () => {
 		svg = d3.select("svg");
 		label = d3.select("#label");
-		points = svg.selectAll(".point").data(data);
+		//legend = d3.select("#label").append("svg");
+		console.log(d3.extent(data, (d) => d.CAPACITY_MW));
 	});
 
 	/* TIMELAPSE SET-UP */
@@ -63,34 +65,37 @@
 	const start = 1950;
 	const end = 2011;
 	let pointer = start; // start the pointer at the "start" year
-	let startData = data.filter(
-		(d) => d.TYPE === "Coal" && d.OP_YEAR <= start - 1
-	);
+	let startData = data.filter((d) => d.OP_YEAR <= start - 1);
 
-	/* this function updates the timelapse with data from each year */
-	const update = (data, currentYear) => {
-		let filtered = data.filter(
-			// TO DO: change opacity of retired plants
-			(d) => d.TYPE === "Coal" && d.OP_YEAR <= currentYear - 1
-			//d.RETIREMENT_YEAR > currentYear - 1 // TO DO: double check retirement dates
-		);
-
-		points
-			.data(filtered)
-			.join("rect")
-			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
-			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
-			.attr("width", "7px")
-			.attr("height", "7px")
-			.attr("class", "point");
-
-		label.html(`Coal Plants in ${currentYear}`).attr("id", "label"); // updating the label with the year
-	};
+	/* a function to scale the size of point to the nameplate capacity in MW;
+  this works in a similar way to the projection function */
+	const min = 3;
+	const max = 10;
+	let size = d3
+		.scaleLinear()
+		.domain(d3.extent(data, (d) => d.CAPACITY_MW))
+		.range([min, max]);
 
 	/* HANDLING THE SCROLLY & TIMELAPSE POINTS */
 
 	/* an array with the text content for each step */
 	const steps = [step0, step1, step2, step3];
+
+	/* this function updates the timelapse with data from each year */
+	const update = (data, currentYear) => {
+		let filtered = data.filter(
+			(d) => d.OP_YEAR <= currentYear - 1
+			//d.RETIREMENT_YEAR > currentYear - 1 // TO DO: double check retirement dates
+		);
+		svg
+			.selectAll(".point")
+			.data(filtered)
+			.join((enter) =>
+				enter.append("circle").attr("class", "point").attr("r", 5)
+			)
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1]);
+	};
 
 	/* this function runs the timelapse timer and resets it once the 
   animation reaches the last year */
@@ -98,6 +103,13 @@
 		if (autoplay === true) {
 			timer = setInterval(() => {
 				update(data, pointer);
+				label
+					.html(`Coal Plants in ${pointer}`)
+					.attr("id", "label")
+					.style("color", "#e76f51")
+					.transition()
+					.duration(300)
+					.style("opacity", 1); // updating the label with the year
 				if (pointer < end) {
 					pointer++;
 				} else {
@@ -106,6 +118,21 @@
 					// pointer = start; // reset pointer
 				}
 			}, 100);
+		} else {
+			svg
+				.selectAll(".point")
+				.data(data)
+				.join("circle")
+				.filter((d) => d.OP_YEAR <= end - 1)
+				.attr("class", "point")
+				.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+				.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
+				.attr("r", (d) => 5)
+				.style("fill", "#e76f51")
+				.style("fill-opacity", 0.65)
+				.style("stroke", "#e76f51")
+				.style("stroke-width", "1px")
+				.style("stroke-opacity", 1);
 		}
 	};
 
@@ -113,65 +140,92 @@
 		//console.log("Step 1");
 		clearInterval(timer); // jumping the timelapse ahead to the end of the animation
 		autoplay = false; // ensuring that timelapse doesn't continue playing once a user scrolls back
-		label.html(`Coal Plants in ${end}`).attr("id", "label"); // updating the label with the year
-		/*
-		let oldPlants = data.filter(
-			(d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1
-		);
-    */
-		points
-			.filter((d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1)
-			.join("rect")
+		label
+			.html(`Coal Plants in ${end}`)
+			.attr("id", "label")
+			.style("color", "#e76f51")
+			.transition()
+			.duration(300)
+			.style("opacity", 1); // updating the label with the year
+
+		//let oldPlants = data.filter((d) => d.OP_YEAR <= end - 1);
+		svg
+			.selectAll(".point")
+			.data(data)
+			.join("circle")
+			.filter((d) => d.OP_YEAR <= end - 1)
 			.attr("class", "point")
-			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
-			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
-			.attr("width", "7px")
-			.attr("height", "7px");
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("r", (d) => size(d.CAPACITY_MW))
+			.style("fill", "#e76f51")
+			.style("fill-opacity", 0.65)
+			.style("stroke", "#e76f51")
+			.style("stroke-width", "1px")
+			.style("stroke-opacity", 1);
 	};
 
 	const handleStep2 = () => {
-		console.log("Step 2");
-
-		label.html(`Retired Plants`).attr("id", "label"); // updating the label with the year
-
-		let oldPlants = data.filter(
-			(d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1
-		);
+		label
+			.html(`Retired Coal Plants`)
+			.attr("id", "label")
+			.style("color", "#e3c500")
+			.transition()
+			.duration(300)
+			.style("opacity", 1);
 
 		svg
 			.selectAll(".point")
-			.data(oldPlants)
-			.join("rect")
+			.data(data)
+			.join("circle")
+			.filter((d) => d.OP_YEAR <= end - 1)
 			.attr("class", "point")
-			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
-			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
-			.attr("width", "7px")
-			.attr("height", "7px");
-
-		let retiredPlants = data.filter(
-			(d) =>
-				d.TYPE === "Coal" &&
-				d.RETIREMENT_YEAR >= end - 1 &&
-				d.RETIREMENT_YEAR <= 2021
-		);
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("r", (d) => size(d.CAPACITY_MW));
 
 		svg
-			.selectAll(".pointR")
-			.data(retiredPlants)
-			.join("rect")
-			.attr("class", ".pointR")
-			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
-			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
-			.attr("width", "7px")
-			.attr("height", "7px")
-			.style("fill", "#ffb703");
-
-		// let newPlants = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR >= end); // TO DO
+			.selectAll(".point")
+			.filter(
+				(d) =>
+					d.OP_YEAR <= end - 1 &&
+					d.RETIREMENT_YEAR <= 2021 &&
+					d.RETIREMENT_YEAR != ""
+			)
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("r", (d) => size(d.CAPACITY_MW))
+			.transition()
+			.duration(300)
+			.style("fill", "#ffe436")
+			.style("fill-opacity", 1)
+			.style("stroke", "#e3c500")
+			.style("stroke-width", "1px")
+			.style("stroke-opacity", 1);
 	};
 
 	const handleStep3 = () => {
-		svg.selectAll(".point").style("opacity", "0.25");
-		svg.selectAll(".pointR").style("opacity", "0.25");
+		label
+			.html(`Retired Coal Plants`)
+			.attr("id", "label")
+			.style("color", "#e3c500")
+			.transition()
+			.duration(300)
+			.style("opacity", 0);
+
+		svg
+			.selectAll(".point")
+			.filter(
+				(d) =>
+					d.OP_YEAR <= end - 1 &&
+					d.RETIREMENT_YEAR <= 2050 &&
+					d.RETIREMENT_YEAR != ""
+			)
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
+			.transition()
+			.duration(1500)
+			.attr("r", 0);
 	};
 
 	/* run code reactively
@@ -196,30 +250,41 @@
 			{/each}
 
 			{#each startData as d}
-				<rect
-					x={projection([+d.LNG, +d.LAT])[0]}
-					y={projection([+d.LNG, +d.LAT])[1]}
-					width="7px"
-					height="7px"
+				<circle
+					cx={projection([+d.LNG, +d.LAT])[0]}
+					cy={projection([+d.LNG, +d.LAT])[1]}
+					r="5"
 					class="point"
 				/>
 			{/each}
 		</svg>
-		<div id="label">Coal Plants in 1950</div>
-	</div>
 
-	<!-- a scrolly container -->
-	<Scrolly bind:value={currentStep}>
-		{#each steps as text, i}
-			<!-- set an "active" class to the step content if the "currentStep" is 
-      equal to the step index -->
-			<div class="step" class:active={currentStep === i}>
-				<div class="step-content">
-					{@html text}
-				</div>
+		<div id="label">
+			Coal Plants in 1950
+			<div id="legend">
+				<svg>
+					<!-- smallest MW -->
+
+					<circle cx={min * 2} cy={max + 5} r={min} class="circle" />
+					<!-- largest MW -->
+					<circle cx={max * 2 + 5} cy={max + 5} r={max} class="circle" />
+				</svg>
 			</div>
-		{/each}
-	</Scrolly>
+		</div>
+
+		<!-- a scrolly container -->
+		<Scrolly bind:value={currentStep}>
+			{#each steps as text, i}
+				<!-- set an "active" class to the step content if the "currentStep" is 
+      equal to the step index -->
+				<div class="step" class:active={currentStep === i}>
+					<div class="step-content">
+						{@html text}
+					</div>
+				</div>
+			{/each}
+		</Scrolly>
+	</div>
 </section>
 
 <style>
@@ -248,13 +313,23 @@
 
 	#label {
 		position: absolute;
-		width: 200 px;
+		text-align: left;
+		width: 200px;
 		top: 10vh;
-		left: 55vw;
+		left: 60vw;
 		color: #e76f51;
 		font-family: "Fira Code", monospace;
 		font-size: 1rem;
 		font-weight: 700;
+	}
+
+	.circle {
+		position: absolute;
+		fill: #e76f51;
+		fill-opacity: 0.65;
+		stroke: #e76f51;
+		stroke-width: 1px;
+		stroke-opacity: 1;
 	}
 
 	/* MAP STYLING */
@@ -266,11 +341,12 @@
 	}
 
 	:global(.point) {
+		position: absolute;
 		fill: #e76f51;
-	}
-
-	:global(.pointR) {
-		fill: #ffb703;
+		fill-opacity: 0.65;
+		stroke: #e76f51;
+		stroke-width: 1px;
+		stroke-opacity: 1;
 	}
 
 	/* STEP CONTENT STYLING */

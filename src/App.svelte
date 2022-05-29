@@ -36,6 +36,7 @@
 />
 
 <style>
+	@import url("https://rsms.me/inter/inter.css");
 	:global(body) {
 		margin: 0px;
 		padding: 0px;

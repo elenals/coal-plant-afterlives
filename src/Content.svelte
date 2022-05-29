@@ -61,7 +61,7 @@
 	a {
 		display: inline-block;
 		position: relative;
-		color: rgb(63, 63, 63);
+		color: rgb(46, 46, 46);
 		text-decoration: none;
 	}
 
@@ -73,7 +73,7 @@
 		height: 3px;
 		left: 0;
 		bottom: 0;
-		background-color: rgb(63, 63, 63);
+		background-color: rgb(46, 46, 46);
 		transform-origin: bottom right;
 		transition: transform 0.25s ease-out;
 	}
