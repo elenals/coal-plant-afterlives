@@ -39,7 +39,7 @@
 
 	h2 {
 		text-align: center;
-		font-family: "Spline Sans Mono", monospace;
+		font-family: "Fira Code", monospace;
 		font-size: 1rem;
 		font-weight: 400;
 		text-transform: uppercase;
