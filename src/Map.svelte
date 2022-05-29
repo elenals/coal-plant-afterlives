@@ -46,24 +46,28 @@
 	/* TIMELAPSE SET-UP */
 
 	const start = 1950;
-	const end = 2011;
+	const end = 2010;
 	let pointer = start; // start the pointer at the "start" year
 	let startData = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR <= start);
 
 	/* this function updates the timelapse with data from each year */
 	const update = (data, currentYear) => {
 		let filtered = data.filter(
-			(d) => d.TYPE === "Coal" && d.OP_YEAR <= currentYear
+			(d) =>
+				d.TYPE === "Coal" &&
+				d.OP_YEAR <= currentYear &&
+				d.RETIREMENT_YEAR > currentYear // TO DO: double check retirement dates
 		);
 		console.log("filtered data", filtered);
 		svg
 			.selectAll(".point")
 			.data(filtered)
-			.join("circle")
+			.join("rect")
 			.attr("class", "point")
-			.attr("r", 4)
-			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
-			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1]);
+			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("width", "7px")
+			.attr("height", "7px");
 
 		label.html(`Coal Plants in ${currentYear}`).attr("id", "label"); // updating the label with the year
 	};
@@ -122,10 +126,11 @@
 			{/each}
 
 			{#each startData as d}
-				<circle
-					cx={projection([+d.LNG, +d.LAT])[0]}
-					cy={projection([+d.LNG, +d.LAT])[1]}
-					r="4px"
+				<rect
+					x={projection([+d.LNG, +d.LAT])[0]}
+					y={projection([+d.LNG, +d.LAT])[1]}
+					width="7px"
+					height="7px"
 					class="point"
 				/>
 			{/each}
@@ -165,9 +170,9 @@
 		position: absolute;
 		width: 200 px;
 		top: 10vh;
-		left: 58vw;
-		color: rgb(92, 81, 81);
-		font-family: "Chivo", sans-serif;
+		left: 55vw;
+		color: #e76f51;
+		font-family: "Spline Sans Mono", monospace;
 		font-size: 1rem;
 		font-weight: 700;
 	}
@@ -181,7 +186,7 @@
 	}
 
 	:global(.point) {
-		fill: rgb(92, 81, 81);
+		fill: #e76f51;
 		opacity: 0.65;
 	}
 
