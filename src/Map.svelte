@@ -55,9 +55,9 @@
 	they will be first available inside onMount: */
 	onMount(async () => {
 		svg = d3.select("svg");
+		legend = d3.select("#legend");
 		label = d3.select("#label");
-		//legend = d3.select("#label").append("svg");
-		console.log(d3.extent(data, (d) => d.CAPACITY_MW));
+		label.html(`Coal Plants in ${pointer}`).attr("id", "label");
 	});
 
 	/* TIMELAPSE SET-UP */
@@ -69,8 +69,8 @@
 
 	/* a function to scale the size of point to the nameplate capacity in MW;
   this works in a similar way to the projection function */
-	const min = 3;
-	const max = 10;
+	const min = 5;
+	const max = 13;
 	let size = d3
 		.scaleLinear()
 		.domain(d3.extent(data, (d) => d.CAPACITY_MW))
@@ -133,6 +133,8 @@
 				.style("stroke", "#e76f51")
 				.style("stroke-width", "1px")
 				.style("stroke-opacity", 1);
+
+			legend.transition().duration(200).style("visibility", "hidden");
 		}
 	};
 
@@ -140,6 +142,7 @@
 		//console.log("Step 1");
 		clearInterval(timer); // jumping the timelapse ahead to the end of the animation
 		autoplay = false; // ensuring that timelapse doesn't continue playing once a user scrolls back
+
 		label
 			.html(`Coal Plants in ${end}`)
 			.attr("id", "label")
@@ -147,6 +150,8 @@
 			.transition()
 			.duration(300)
 			.style("opacity", 1); // updating the label with the year
+
+		legend.transition().duration(200).style("visibility", "visible");
 
 		//let oldPlants = data.filter((d) => d.OP_YEAR <= end - 1);
 		svg
@@ -173,6 +178,8 @@
 			.transition()
 			.duration(300)
 			.style("opacity", 1);
+
+		legend.style("visibility", "visible");
 
 		svg
 			.selectAll(".point")
@@ -210,8 +217,10 @@
 			.attr("id", "label")
 			.style("color", "#e3c500")
 			.transition()
-			.duration(300)
+			.duration(200)
 			.style("opacity", 0);
+
+		legend.style("visibility", "visible");
 
 		svg
 			.selectAll(".point")
@@ -258,33 +267,31 @@
 				/>
 			{/each}
 		</svg>
-
-		<div id="label">
-			Coal Plants in 1950
-			<div id="legend">
-				<svg>
-					<!-- smallest MW -->
-
-					<circle cx={min * 2} cy={max + 5} r={min} class="circle" />
-					<!-- largest MW -->
-					<circle cx={max * 2 + 5} cy={max + 5} r={max} class="circle" />
-				</svg>
-			</div>
+		<div id="label" />
+		<div id="legend">
+			<svg>
+				<!-- smallest MW -->
+				<text x="0" y="28" class="legendLabel">0.5 MW</text>
+				<circle cx={60} cy={25} r={min} class="circle" />
+				<!-- largest MW -->
+				<circle cx={85} cy={25} r={max} class="circle" />
+				<text x="110" y="28" class="legendLabel">1 GW</text>
+			</svg>
 		</div>
-
-		<!-- a scrolly container -->
-		<Scrolly bind:value={currentStep}>
-			{#each steps as text, i}
-				<!-- set an "active" class to the step content if the "currentStep" is 
-      equal to the step index -->
-				<div class="step" class:active={currentStep === i}>
-					<div class="step-content">
-						{@html text}
-					</div>
-				</div>
-			{/each}
-		</Scrolly>
 	</div>
+
+	<!-- a scrolly container -->
+	<Scrolly bind:value={currentStep}>
+		{#each steps as text, i}
+			<!-- set an "active" class to the step content if the "currentStep" is 
+      equal to the step index -->
+			<div class="step" class:active={currentStep === i}>
+				<div class="step-content">
+					{@html text}
+				</div>
+			</div>
+		{/each}
+	</Scrolly>
 </section>
 
 <style>
@@ -315,12 +322,27 @@
 		position: absolute;
 		text-align: left;
 		width: 200px;
-		top: 10vh;
+		top: 100px;
 		left: 60vw;
 		color: #e76f51;
 		font-family: "Fira Code", monospace;
 		font-size: 1rem;
 		font-weight: 700;
+	}
+
+	#legend {
+		position: absolute;
+		text-align: left;
+		width: 200px;
+		top: 115px;
+		left: 60vw;
+		visibility: hidden;
+	}
+
+	.legendLabel {
+		fill: #e76f51;
+		font-family: "Fira Code", monospace;
+		font-size: 0.75rem;
 	}
 
 	.circle {
