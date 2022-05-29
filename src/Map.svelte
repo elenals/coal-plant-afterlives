@@ -3,6 +3,10 @@
 	export let w = 1000;
 	export let h = 800;
 	export let m = { top: 5, right: 5, bottom: 5, left: 5 };
+	export let step0 = "";
+	export let step1 = "";
+	export let step2 = "";
+	export let step3 = "";
 
 	/* IMPORTS */
 
@@ -25,6 +29,7 @@
 	let currentStep;
 	let timer;
 	let label;
+	let autoplay = true;
 
 	/* ACCESSING DOM ELEMENTS */
 
@@ -52,19 +57,19 @@
 	/* TIMELAPSE SET-UP */
 
 	const start = 1950;
-	const end = 2010;
+	const end = 2011;
 	let pointer = start; // start the pointer at the "start" year
-	let startData = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR <= start);
+	let startData = data.filter(
+		(d) => d.TYPE === "Coal" && d.OP_YEAR <= start - 1
+	);
 
 	/* this function updates the timelapse with data from each year */
 	const update = (data, currentYear) => {
 		let filtered = data.filter(
-			(d) =>
-				d.TYPE === "Coal" &&
-				d.OP_YEAR <= currentYear &&
-				d.RETIREMENT_YEAR > currentYear // TO DO: double check retirement dates
+			// TO DO: change opacity of retired plants
+			(d) => d.TYPE === "Coal" && d.OP_YEAR <= currentYear - 1
+			//d.RETIREMENT_YEAR > currentYear - 1 // TO DO: double check retirement dates
 		);
-		console.log("filtered data", filtered);
 		svg
 			.selectAll(".point")
 			.data(filtered)
@@ -81,45 +86,101 @@
 	/* HANDLING THE SCROLLY & TIMELAPSE POINTS */
 
 	/* an array with the text content for each step */
-	const steps = [
-		"<p>All coal plants in the U.S.</p>",
-		"<p>Coal plants that have been retired, as of 2022.</p>",
-		"<p>Coal plants that will be retired by 2050.</p>",
-	];
+	const steps = [step0, step1, step2, step3];
 
 	/* this function runs the timelapse timer and resets it once the 
   animation reaches the last year */
-	const step0 = () => {
-		console.log("Step 0");
-		timer = setInterval(() => {
-			update(data, pointer);
-			if (pointer < end) {
-				pointer++;
-			} else {
-				// if the timelapse reaches the last year
-				clearInterval(timer);
-				//pointer = start; // reset pointer
-			}
-		}, 100);
+	const handleStep0 = () => {
+		if (autoplay === true) {
+			timer = setInterval(() => {
+				update(data, pointer);
+				if (pointer < end) {
+					pointer++;
+				} else {
+					// if the timelapse reaches the last year
+					clearInterval(timer);
+					// pointer = start; // reset pointer
+				}
+			}, 100);
+		}
 	};
 
-	const step1 = () => {
-		console.log("Step 1");
+	const handleStep1 = () => {
+		//console.log("Step 1");
+		clearInterval(timer);
+		autoplay = false;
+		label.html(`Coal Plants in ${end}`).attr("id", "label"); // updating the label with the year
+		svg.selectAll(".pointR").style("visibility", "hidden");
+
+		let oldPlants = data.filter(
+			(d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1
+		);
+		svg
+			.selectAll(".point")
+			.data(oldPlants)
+			.join("rect")
+			.attr("class", "point")
+			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("width", "7px")
+			.attr("height", "7px");
 	};
 
-	const step2 = () => {
+	const handleStep2 = () => {
 		console.log("Step 2");
+
+		label.html(`Retired Plants`).attr("id", "label"); // updating the label with the year
+
+		let oldPlants = data.filter(
+			(d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1
+		);
+
+		svg
+			.selectAll(".point")
+			.data(oldPlants)
+			.join("rect")
+			.attr("class", "point")
+			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("width", "7px")
+			.attr("height", "7px");
+
+		let retiredPlants = data.filter(
+			(d) =>
+				d.TYPE === "Coal" &&
+				d.RETIREMENT_YEAR >= end - 1 &&
+				d.RETIREMENT_YEAR <= 2021
+		);
+
+		svg
+			.selectAll(".pointR")
+			.data(retiredPlants)
+			.join("rect")
+			.attr("class", ".pointR")
+			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("width", "7px")
+			.attr("height", "7px")
+			.style("fill", "#ffb703");
+
+		let newPlants = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR >= end);
+	};
+
+	const handleStep3 = () => {
+		console.log("Step 3");
 	};
 
 	/* run code reactively
 	the "if...else" block will run every time the variable "currentStep" changes
 	and evaluate differently based on the value of "currentStep" */
 	$: if (currentStep == 0) {
-		step0();
+		handleStep0();
 	} else if (currentStep == 1) {
-		step1();
+		handleStep1();
 	} else if (currentStep == 2) {
-		step2();
+		handleStep2();
+	} else if (currentStep == 3) {
+		handleStep3();
 	}
 </script>
 
@@ -160,7 +221,7 @@
 <style>
 	section {
 		text-align: center;
-		max-width: 95%;
+		max-width: 100%;
 		margin: 0;
 		padding: 0;
 	}
@@ -205,6 +266,11 @@
 		opacity: 0.65;
 	}
 
+	:global(.pointR) {
+		fill: #ffb703;
+		opacity: 1;
+	}
+
 	/* STEP CONTENT STYLING */
 
 	/* the container for each step */
@@ -222,6 +288,7 @@
 		font-family: "Chivo", sans-serif;
 		font-size: 1rem;
 		border-radius: 5px;
+		width: 30vw;
 		padding: 0.5rem 1rem;
 		display: flex;
 		flex-direction: column;

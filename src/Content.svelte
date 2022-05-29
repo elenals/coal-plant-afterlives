@@ -54,14 +54,14 @@
 
 	p {
 		text-align: left;
-		font-family: "Spectral", serif;
-		font-size: 1.25rem;
+		font-family: "Chivo", sans-serif;
+		font-size: 1.15rem;
 	}
 
 	a {
 		display: inline-block;
 		position: relative;
-		color: rgb(46, 46, 46);
+		color: rgb(63, 63, 63);
 		text-decoration: none;
 	}
 
@@ -73,7 +73,7 @@
 		height: 3px;
 		left: 0;
 		bottom: 0;
-		background-color: rgb(46, 46, 46);
+		background-color: rgb(63, 63, 63);
 		transform-origin: bottom right;
 		transition: transform 0.25s ease-out;
 	}

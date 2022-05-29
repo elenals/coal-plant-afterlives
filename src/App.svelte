@@ -25,10 +25,15 @@
 <Content
 	hed="Coal Plant Afterlives"
 	byline="Elena Shao"
-	content="<p>Across the country, coal-fired power plants like TKTK are powering down, squeezed out by cheaper natural gas and renewable energy and tougher emissions regulations. The pattern, while promising for a greener future, also ends up leaving behind a toxic legacy of industrial pollution and waste. In coal dependent communities, the transition away from coal can disrupt families and economies.</p>"
+	content="<p>Across the country, coal-fired power plants like TKTK are powering down, squeezed out by cheaper natural gas and renewable energy and tougher emissions regulations.</p> <p>The pattern, while promising for a greener future, also ends up leaving behind a toxic legacy of industrial pollution and waste. In coal dependent communities, the transition away from coal can disrupt families and economies.</p>"
 />
 
-<Map />
+<Map
+	step0="<p>Coal-fired generation increased steadily from 1990 to 2011, when U.S. coal-fired capacity <a href='https://www.eia.gov/totalenergy/data/annual/archive/038411.pdf'>peaked</a> at 318 gigawatts.</p>"
+	step1="<p>That year, coal provided 22% of the country’s energy production. While coal far surpassed crude oil at 12%, nuclear power at 8% and renewable energy (which totalled 11%, combined), 2011 was the first year natural gas outpaced coal, sourcing almost a quarter of U.S. energy production.</p>"
+	step2="<p>Since then, coal consumption and generation has declined substantially. Many old coal fired plants retired or switched to cheaper fuels, and few plants came online in their place. XX coal plants retired between 2011 and 2022, taking with them XX gigawatts of energy production.</p>"
+	step3="<p>Even more coal plants are expected to retire over the next few decades as the U.S. seeks to clean its power grid of fossil fuels by 2030.</p>"
+/>
 
 <style>
 	:global(body) {
