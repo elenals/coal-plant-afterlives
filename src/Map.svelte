@@ -1,6 +1,6 @@
 <script>
-	/* EXPORTING PROPS */
-	export let w = 1000; // setting default values
+	/* EXPORTS */
+	export let w = 1000;
 	export let h = 800;
 	export let m = { top: 5, right: 5, bottom: 5, left: 5 };
 
@@ -15,8 +15,10 @@
 	import * as topojson from "topojson";
 
 	/* importing data */
-	import topo from "./data/counties-10m.json"; // topojson data
-	import data from "./data/power-plants-eia.json"; // power plant locations data
+	import topo from "./assets/counties-10m.json"; // topojson data
+	import data from "./assets/power-plants-eia.json"; // power plant locations data
+
+	/* SET-UP */
 
 	/* initializing some variables */
 	let svg;
@@ -47,6 +49,35 @@
 	); //.translate([w / 2, h / 2]);
 	const path = d3.geoPath().projection(projection);
 
+	/* TIMELAPSE SET-UP */
+
+	const start = 1950;
+	const end = 2010;
+	let pointer = start; // start the pointer at the "start" year
+	let startData = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR <= start);
+
+	/* this function updates the timelapse with data from each year */
+	const update = (data, currentYear) => {
+		let filtered = data.filter(
+			(d) =>
+				d.TYPE === "Coal" &&
+				d.OP_YEAR <= currentYear &&
+				d.RETIREMENT_YEAR > currentYear // TO DO: double check retirement dates
+		);
+		console.log("filtered data", filtered);
+		svg
+			.selectAll(".point")
+			.data(filtered)
+			.join("rect")
+			.attr("class", "point")
+			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
+			.attr("width", "7px")
+			.attr("height", "7px");
+
+		label.html(`Coal Plants in ${currentYear}`).attr("id", "label"); // updating the label with the year
+	};
+
 	/* HANDLING THE SCROLLY & TIMELAPSE POINTS */
 
 	/* an array with the text content for each step */
@@ -60,7 +91,6 @@
   animation reaches the last year */
 	const step0 = () => {
 		console.log("Step 0");
-		/*
 		timer = setInterval(() => {
 			update(data, pointer);
 			if (pointer < end) {
@@ -68,10 +98,9 @@
 			} else {
 				// if the timelapse reaches the last year
 				clearInterval(timer);
-				pointer = start; // reset pointer
+				//pointer = start; // reset pointer
 			}
 		}, 100);
-    */
 	};
 
 	const step1 = () => {
@@ -82,7 +111,7 @@
 		console.log("Step 2");
 	};
 
-	/* run code reactively:
+	/* run code reactively
 	the "if...else" block will run every time the variable "currentStep" changes
 	and evaluate differently based on the value of "currentStep" */
 	$: if (currentStep == 0) {
@@ -95,8 +124,25 @@
 </script>
 
 <section>
-	<!-- a sticky base map -->
-	<div class="container" />
+	<div id="container">
+		<svg width={w} height={h}>
+			{#each geo as g}
+				<path d={path(g)} class="states" />
+			{/each}
+
+			{#each startData as d}
+				<rect
+					x={projection([+d.LNG, +d.LAT])[0]}
+					y={projection([+d.LNG, +d.LAT])[1]}
+					width="7px"
+					height="7px"
+					class="point"
+				/>
+			{/each}
+		</svg>
+		<div id="label">Coal Plants in 1950</div>
+	</div>
+
 	<!-- a scrolly container -->
 	<Scrolly bind:value={currentStep}>
 		{#each steps as text, i}
@@ -114,15 +160,22 @@
 <style>
 	section {
 		text-align: center;
+		max-width: 95%;
 		margin: 0;
 		padding: 0;
 	}
 
-	.container {
+	svg {
+		overflow: hidden;
+	}
+
+	#container {
 		text-align: center;
-		width: 100vw;
-		height: 100vh;
-		margin: 0;
+		justify-content: center;
+		max-width: 100vw;
+		max-height: 100vh;
+		top: 10vh;
+		margin: auto;
 		padding: 0;
 		position: sticky;
 		overflow: hidden;
@@ -134,7 +187,7 @@
 		top: 10vh;
 		left: 55vw;
 		color: #e76f51;
-		font-family: "Spline Sans Mono", monospace;
+		font-family: "Fira Code", monospace;
 		font-size: 1rem;
 		font-weight: 700;
 	}
@@ -166,9 +219,8 @@
 	.step-content {
 		background-color: #f8f9fa;
 		color: #ccc;
-		font-family: "Spline Sans Mono", monospace;
-		font-size: 0.85rem;
-		font-weight: 400;
+		font-family: "Chivo", sans-serif;
+		font-size: 1rem;
 		border-radius: 5px;
 		padding: 0.5rem 1rem;
 		display: flex;
