@@ -2,6 +2,7 @@
 	/* IMPORTS */
 	import Content from "./Content.svelte"; // reusable heading & content component
 	import Map from "./Map.svelte";
+	import Sliders from "./Sliders.svelte";
 </script>
 
 <svelte:head>
@@ -28,6 +29,8 @@
 	content="<p>Across the country, coal-fired power plants like TKTK are powering down, squeezed out by cheaper natural gas and renewable energy and tougher emissions regulations.</p> <p>The pattern, while promising for a greener future, also ends up leaving behind a toxic legacy of industrial pollution and waste. In coal dependent communities, the transition away from coal can disrupt families and economies.</p>"
 />
 
+<Sliders />
+
 <Map
 	step0="<p>Coal-fired generation increased steadily from 1990 to 2011, when U.S. coal-fired capacity <a href='https://www.eia.gov/totalenergy/data/annual/archive/038411.pdf'>peaked</a> at 318 gigawatts.</p>"
 	step1="<p>That year, coal provided 22% of the country’s energy production. While coal far surpassed crude oil at 12%, nuclear power at 8% and renewable energy (which totalled 11%, combined), 2011 was the first year natural gas outpaced coal, sourcing almost a quarter of U.S. energy production.</p>"
@@ -37,6 +40,7 @@
 
 <style>
 	@import url("https://rsms.me/inter/inter.css");
+
 	:global(body) {
 		margin: 0px;
 		padding: 0px;
