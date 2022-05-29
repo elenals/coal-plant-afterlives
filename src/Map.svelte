@@ -30,6 +30,23 @@
 	let timer;
 	let label;
 	let autoplay = true;
+	let points;
+
+	/* BASE MAP */
+
+	const states = topojson.feature(topo, topo.objects.states);
+	const geo = states.features;
+
+	const projection = d3.geoAlbersUsa(); //.translate([w / 2, h / 2]);
+	const path = d3.geoPath().projection(
+		projection.fitExtent(
+			[
+				[m.top, m.left],
+				[w - m.bottom, h - m.right],
+			],
+			states
+		)
+	);
 
 	/* ACCESSING DOM ELEMENTS */
 
@@ -38,21 +55,8 @@
 	onMount(async () => {
 		svg = d3.select("svg");
 		label = d3.select("#label");
+		points = svg.selectAll(".point").data(data);
 	});
-
-	/* BASE MAP */
-
-	const states = topojson.feature(topo, topo.objects.states);
-	const geo = states.features;
-
-	const projection = d3.geoAlbersUsa().fitExtent(
-		[
-			[m.top, m.left],
-			[w - m.bottom, h - m.right],
-		],
-		states
-	); //.translate([w / 2, h / 2]);
-	const path = d3.geoPath().projection(projection);
 
 	/* TIMELAPSE SET-UP */
 
@@ -70,15 +74,15 @@
 			(d) => d.TYPE === "Coal" && d.OP_YEAR <= currentYear - 1
 			//d.RETIREMENT_YEAR > currentYear - 1 // TO DO: double check retirement dates
 		);
-		svg
-			.selectAll(".point")
+
+		points
 			.data(filtered)
 			.join("rect")
-			.attr("class", "point")
 			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
 			.attr("y", (d) => projection([+d.LNG, +d.LAT])[1])
 			.attr("width", "7px")
-			.attr("height", "7px");
+			.attr("height", "7px")
+			.attr("class", "point");
 
 		label.html(`Coal Plants in ${currentYear}`).attr("id", "label"); // updating the label with the year
 	};
@@ -107,17 +111,16 @@
 
 	const handleStep1 = () => {
 		//console.log("Step 1");
-		clearInterval(timer);
-		autoplay = false;
+		clearInterval(timer); // jumping the timelapse ahead to the end of the animation
+		autoplay = false; // ensuring that timelapse doesn't continue playing once a user scrolls back
 		label.html(`Coal Plants in ${end}`).attr("id", "label"); // updating the label with the year
-		svg.selectAll(".pointR").style("visibility", "hidden");
-
+		/*
 		let oldPlants = data.filter(
 			(d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1
 		);
-		svg
-			.selectAll(".point")
-			.data(oldPlants)
+    */
+		points
+			.filter((d) => d.TYPE === "Coal" && d.OP_YEAR <= end - 1)
 			.join("rect")
 			.attr("class", "point")
 			.attr("x", (d) => projection([+d.LNG, +d.LAT])[0])
