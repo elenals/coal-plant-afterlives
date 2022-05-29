@@ -1,117 +1,140 @@
 <script>
-	/* import sub-components */
-	import Scroll from "./Scrolly.svelte"; // Russell Goldenberg's Scrolly component (from https://t.co/l8fOJaiwkX)
+	/* EXPORTS */
+	export let w = 840;
+	export let h = 640;
 
-	/* import other requirements */
-	import { tweened } from "svelte/motion";
+	/* IMPORTS */
+
+	/* importing sub-components */
+	import Scrolly from "./Scrolly.svelte"; // Russell Goldenberg's Scrolly component (from https://t.co/l8fOJaiwkX)
+
+	/* importing other requirements */
 	import { onMount } from "svelte";
 	import * as d3 from "d3";
 	import * as topojson from "topojson";
 
-	/* import data */
+	/* importing data */
 	import topo from "./assets/counties-10m.json"; // topojson data
 	import data from "./assets/power-plants-eia.json"; // power plant locations data
 
-	/* colors */
-	const colorA = "#495057"; // blue-ish gray
-	const colorB = "#38a3a5"; // teal
-	const colorC = "#e55c90"; // pink
+	/* SET-UP */
 
-	/* MAIN MAP SCROLLY */
+	/* initializing some variables */
+	let svg;
+	let currentStep;
+	let timer;
+	let inverted;
+	let label;
 
-	let w = 840;
-	let h = 640;
+	/* ACCESSING DOM ELEMENTS */
 
 	/* if you need access to DOM elements inside the component, 
 	they will be first available inside onMount: */
 	onMount(async () => {
-		let svg = d3.select("svg").attr("width", w).attr("height", h);
-		let points = svg
-			.selectAll(".point")
-			.data(filtered)
-			.join("circle")
-			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
-			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1])
-			.attr("r", 4)
-			.attr("class", "point")
-			.style("fill", colorA);
+		svg = d3.select("svg");
+		label = d3.select("#label");
 	});
 
-	/* define a MAP PROJECTION and a PATH GENERATOR */
+	/* BASE MAP */
+
 	const projection = d3.geoAlbersUsa().translate([w / 2, h / 2]);
 	const path = d3.geoPath().projection(projection);
 
-	/* prep for base map */
 	const states = topojson.feature(topo, topo.objects.states);
 	const geo = states.features;
 
-	/* filtering data to only include coal power plants and ignore null values */
-	let filtered = data.filter((d) => {
-		return projection([+d.LNG, +d.LAT]) != null && d.TYPE === "Coal";
-	});
+	/* TIMELAPSE SET-UP */
 
-	/* handling the scrolly */
-	let currentStep;
+	const start = 1950;
+	const end = 2011;
+	let pointer = start; // start the pointer at the "start" year
+	let startData = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR <= start);
+
+	/* this function updates the timelapse with data from each year */
+	const update = (data, currentYear) => {
+		let filtered = data.filter(
+			(d) => d.TYPE === "Coal" && d.OP_YEAR <= currentYear
+		);
+		console.log("filtered data", filtered);
+		svg
+			.selectAll(".point")
+			.data(filtered)
+			.join("circle")
+			.attr("class", "point")
+			.attr("r", 4)
+			.attr("cx", (d) => projection([+d.LNG, +d.LAT])[0])
+			.attr("cy", (d) => projection([+d.LNG, +d.LAT])[1]);
+
+		label.html(`Coal Plants in ${currentYear}`).attr("id", "label"); // updating the label with the year
+	};
+
+	/* HANDLING THE SCROLLY & TIMELAPSE POINTS */
+
+	/* an array with the text content for each step */
 	const steps = [
 		"<p>All coal plants in the U.S.</p>",
 		"<p>Coal plants that have been retired, as of 2022.</p>",
 		"<p>Coal plants that will be retired by 2050.</p>",
 	];
 
-	const stepZero = function () {
-		d3.select("svg").selectAll(".point").style("fill", colorA);
+	/* this function runs the timelapse timer and resets it once the 
+  animation reaches the last year */
+	const step0 = () => {
+		console.log("Step 0");
+		timer = setInterval(() => {
+			update(data, pointer);
+			if (pointer < end) {
+				pointer++;
+			} else {
+				// if the timelapse reaches the last year
+				clearInterval(timer);
+				pointer = start; // reset pointer
+			}
+		}, 100);
 	};
 
-	const stepOne = function () {
-		d3.select("svg")
-			.selectAll(".point")
-			.style("fill", (d) => {
-				if (d.RETIREMENT_YEAR <= "2021" && d.RETIREMENT_YEAR != "") {
-					return colorB;
-				} else {
-					return colorA;
-				}
-			});
+	const step1 = () => {
+		console.log("Step 1");
 	};
 
-	const stepTwo = function () {
-		d3.select("svg")
-			.selectAll(".point")
-			.style("fill", (d) => {
-				if (d.RETIREMENT_YEAR <= "2021" && d.RETIREMENT_YEAR != "") {
-					return colorB;
-				} else if (d.RETIREMENT_YEAR >= "2022") {
-					return colorC;
-				} else {
-					return colorA;
-				}
-			});
+	const step2 = () => {
+		console.log("Step 2");
 	};
 
 	/* run code reactively
 	the "if...else" block will run every time the variable "currentStep" changes
 	and evaluate differently based on the value of "currentStep" */
 	$: if (currentStep == 0) {
-		stepZero();
+		step0();
 	} else if (currentStep == 1) {
-		stepOne();
+		step1();
 	} else if (currentStep == 2) {
-		stepTwo();
+		step2();
 	}
 </script>
 
 <section>
 	<!-- a sticky base map -->
 	<div class="container">
-		<svg>
+		<svg width={w} height={h}>
 			{#each geo as g}
 				<path d={path(g)} class="states" />
 			{/each}
+
+			{#each startData as d}
+				<circle
+					cx={projection([+d.LNG, +d.LAT])[0]}
+					cy={projection([+d.LNG, +d.LAT])[1]}
+					r="4px"
+					class="point"
+				/>
+			{/each}
 		</svg>
+		<div id="label">Coal Plants in 1950</div>
 	</div>
 
 	<!-- a scrolly container -->
-	<Scroll bind:value={currentStep}>
+	<Scrolly bind:value={currentStep}>
 		{#each steps as text, i}
 			<!-- set an "active" class to the step content if the "currentStep" is 
       equal to the step index -->
@@ -121,57 +144,48 @@
 				</div>
 			</div>
 		{/each}
-	</Scroll>
+	</Scrolly>
 </section>
 
 <style>
-	/* use the :global() modifier to apply styles globally */
+	section {
+		text-align: center;
+		justify-content: center;
+		margin: auto;
+	}
+
 	.container {
-		width: 840px;
-		height: 640px;
 		top: 5%;
 		margin: auto;
 		position: sticky;
 		padding: 20px 20px 20px 20px;
 	}
 
-	:global(.states) {
+	#label {
+		position: absolute;
+		width: 200 px;
+		top: 10vh;
+		left: 58vw;
+		color: rgb(92, 81, 81);
+		font-family: "Chivo", sans-serif;
+		font-size: 1rem;
+		font-weight: 700;
+	}
+
+	/* MAP STYLING */
+
+	.states {
 		fill: #f8f9fa;
 		stroke: #dee2e6;
 		stroke-width: 1px;
 	}
 
 	:global(.point) {
-		opacity: 0.5;
+		fill: rgb(92, 81, 81);
+		opacity: 0.65;
 	}
 
-	:global(.point:hover) {
-		fill: #ff4d6d;
-		opacity: 1;
-	}
-
-	:global(.tooltip) {
-		position: absolute;
-		padding: 10px;
-		border-radius: 3px;
-		width: 200px;
-		background-color: #f8f9fa;
-		box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-		pointer-events: none;
-		stroke: black;
-	}
-
-	:global(.tooltip p) {
-		font-family: "IBM Plex Mono", monospace;
-		margin: 0;
-		font-size: 12px;
-	}
-
-	:global(.tooltip.hidden) {
-		display: none;
-	}
-
-	/* STEP STYLING */
+	/* STEP CONTENT STYLING */
 
 	/* the container for each step */
 	.step {
@@ -185,8 +199,9 @@
 	.step-content {
 		background-color: #f8f9fa;
 		color: #ccc;
-		font-family: "IBM Plex Mono", monospace;
-		font-size: 12px;
+		font-family: "Spline Sans Mono", monospace;
+		font-size: 0.85rem;
+		font-weight: 400;
 		border-radius: 5px;
 		padding: 0.5rem 1rem;
 		display: flex;

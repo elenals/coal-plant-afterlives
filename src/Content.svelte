@@ -35,7 +35,6 @@
 		font-family: "Chivo", sans-serif;
 		font-size: 4rem;
 		font-weight: 900;
-		width: 700px;
 	}
 
 	h2 {

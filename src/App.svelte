@@ -1,15 +1,11 @@
 <script>
-	/***************/
-	/*** IMPORTS ***/
-	/***************/
-
-	/* IMPORTING COMPONENTS */
+	/* importing sub-components */
+	import Content from "./Content.svelte"; // reusable heading & content component
 	import Map from "./Map.svelte";
-	import Content from "./Content.svelte";
 </script>
 
 <svelte:head>
-	<!-- IMPORTING GOOGLE FONTS -->
+	<!-- importing Google Fonts -->
 	<!-- 
 			CSS rules to specify the families:
 			font-family: 'Chivo', sans-serif;
@@ -31,6 +27,8 @@
 	byline="Elena Shao"
 	content="<p>Across the country, coal-fired power plants like TKTK are powering down, squeezed out by cheaper natural gas and renewable energy and tougher emissions regulations. The pattern, while promising for a greener future, also ends up leaving behind a toxic legacy of industrial pollution and waste. In coal dependent communities, the transition away from coal can disrupt families and economies.</p>"
 />
+
+<Map />
 
 <style>
 	:global(body) {
