@@ -163,11 +163,12 @@
 			.attr("height", "7px")
 			.style("fill", "#ffb703");
 
-		let newPlants = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR >= end);
+		// let newPlants = data.filter((d) => d.TYPE === "Coal" && d.OP_YEAR >= end); // TO DO
 	};
 
 	const handleStep3 = () => {
-		console.log("Step 3");
+		svg.selectAll(".point").style("opacity", "0.25");
+		svg.selectAll(".pointR").style("opacity", "0.25");
 	};
 
 	/* run code reactively
@@ -263,12 +264,10 @@
 
 	:global(.point) {
 		fill: #e76f51;
-		opacity: 0.65;
 	}
 
 	:global(.pointR) {
 		fill: #ffb703;
-		opacity: 1;
 	}
 
 	/* STEP CONTENT STYLING */
