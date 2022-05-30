@@ -1,7 +1,6 @@
 <script>
 	export let hed = "";
 	export let byline = "";
-	export let subhed = "";
 </script>
 
 <section>
@@ -11,9 +10,6 @@
 		{/if}
 		{#if { byline } != ""}
 			<h2><a href="https://github.com/elenals">{byline}</a></h2>
-		{/if}
-		{#if { subhed } != ""}
-			<h3>{subhed}</h3>
 		{/if}
 		<p><slot name="content" /></p>
 	</div>
@@ -33,7 +29,7 @@
 		font-size: 3rem;
 		line-height: 2.75rem;
 		font-weight: 900;
-		margin-top: 20vh;
+		margin-top: 10vh;
 	}
 
 	h2 {
@@ -42,13 +38,6 @@
 		font-size: 1rem;
 		font-weight: 400;
 		text-transform: uppercase;
-	}
-
-	h3 {
-		text-align: left;
-		font-family: "Chivo", sans-serif;
-		font-size: 2rem;
-		font-weight: 700;
 	}
 
 	p {

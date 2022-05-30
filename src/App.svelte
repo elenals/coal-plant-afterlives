@@ -4,7 +4,6 @@
 	import Content from "./Content.svelte"; // reusable heading & content component
 	import Map from "./Map.svelte";
 	import Sliders from "./Sliders.svelte";
-	import Spacer from "./Spacer.svelte"; // reusable spacer component
 </script>
 
 <svelte:head>
@@ -32,11 +31,8 @@
 	step3="<p>Some believe these projects will serve as blueprint for how to navigate the green energy transition, but others note that there’s still far to go when it comes to addressing the toxic legacy coal decommissioning leaves behind.</p>"
 />
 
-<Spacer height="100px" />
-
 <Content
 	hed="How Dirty Coal Power Could Get a Greener Second Life"
-	subhed=""
 	byline="By Elena Shao"
 >
 	<span slot="content">
@@ -74,7 +70,7 @@
 	step3="<p>And even more coal plants are expected to retire over the next few decades as the U.S. seeks to clean its power grid of fossil fuels by 2030.</p>"
 />
 
-<Content hed="" subhed="" byline=""
+<Content hed="" byline=""
 	><span slot="content">
 		<p>
 			When aging coal plants shut down, some are demolished and flattened. They
@@ -83,13 +79,13 @@
 		</p>
 		<p>
 			But, there is no legal requirement to demolish and remediate a retiring
-			power plant. In most cases, plant operators aren’t responsible for
+			power plant. In most cases, plant operators aren't responsible for
 			cleaning up the contamination or pollution that the coal plant has left
 			behind. The onus falls on a developer willing to purchase the plant and
 			pay the costs of cleanup and reclamation, or more often, on taxpayers.
 		</p>
 		<p>
-			“It’s a very long process to remediate a coal site,” said Jessica
+			“It's a very long process to remediate a coal site,” said Jessica
 			Collingsworth, the lead energy policy analyst for the Union of Concerned
 			Scientists. “Ultimately, the polluters should be on the hook to pay for
 			remediation.”
@@ -106,6 +102,24 @@
 	</span></Content
 >
 
+<Content>
+	<span slot="content">
+		<p>
+			In California's Morro Bay, a power plant's three 450-feet-high smokestacks
+			still remain, despite the plant shutting down more than eight years ago.
+			Morro Bay Power Plant began burning coal in the 1950s, and later converted
+			to burn natural gas.
+		</p>
+		<p>
+			Morro Bay City Council voted last year to demolish the stacks, but even
+			that might not happen until 2027, according to the city's agreement with
+			owner Vistra Company. The energy company hopes to place a <a
+				href="https://www.morro-bay.ca.us/DocumentCenter/View/15093/Vistra---Morro-Bay---Battery-Project-Presentation-022021"
+				>battery storage facility</a
+			> on the defunct power plant lands.
+		</p>
+	</span>
+</Content>
 <Sliders />
 
 <style>
