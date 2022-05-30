@@ -40,7 +40,9 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		column-gap: 20px;
-		row-gap: 60px;
+		gap: 5px;
+	}
+	.item {
+		margin: auto;
 	}
 </style>

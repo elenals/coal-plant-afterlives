@@ -1,5 +1,6 @@
 <script>
 	/* IMPORTS */
+	import Grid from "./Grid.svelte";
 	import Content from "./Content.svelte"; // reusable heading & content component
 	import Map from "./Map.svelte";
 	import Sliders from "./Sliders.svelte";
@@ -22,6 +23,8 @@
 		rel="stylesheet"
 	/>
 </svelte:head>
+
+<Grid />
 
 <Content
 	hed="Coal Plant Afterlives"
