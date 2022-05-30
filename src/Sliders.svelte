@@ -21,7 +21,7 @@
 		<Slider
 			beforeImg="images/rio-bravo-poso-2016.jpg"
 			afterImg="images/rio-bravo-poso-2022.jpg"
-			title="Rio Bravo Poso Power Plant in Bakesfield, CA"
+			title="Rio Bravov Poso Power Plant in Bakesfield, CA"
 			details="No listed plans for redevelopment"
 		/>
 		<Slider
@@ -40,9 +40,7 @@
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		gap: 5px;
-	}
-	.item {
-		margin: auto;
+		column-gap: 20px;
+		row-gap: 80px;
 	}
 </style>

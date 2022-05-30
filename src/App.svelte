@@ -24,7 +24,7 @@
 	/>
 </svelte:head>
 
-<Grid />
+<Grid step0="Step 0" step1="Step 1" step2="Step 2" step3="Step 3" />
 
 <Content
 	hed="Coal Plant Afterlives"
