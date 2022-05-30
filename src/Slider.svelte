@@ -1,7 +1,8 @@
 <script>
 	export let beforeImg;
 	export let afterImg;
-	export let caption = "";
+	export let title = "";
+	export let details = "";
 	export let w = "550px";
 	export let h = "300px";
 
@@ -21,7 +22,10 @@
 </script>
 
 <div style="width:{w}; height:{h}">
-	<div><p>{caption}</p></div>
+	<div>
+		<h4>{title}</h4>
+		<p>{details}</p>
+	</div>
 	<div class="slider">
 		<div
 			class="layer"
@@ -59,9 +63,21 @@
 		position: absolute;
 		background-size: 100%, auto;
 	}
-	p {
+	h4 {
+		padding: 0;
+		margin: 0;
 		text-align: left;
 		font-family: "Chivo", sans-serif;
 		font-size: 1.15rem;
+	}
+	p {
+		padding: 0;
+		margin: 0;
+		text-align: left;
+		font-family: "Fira Code", monospace;
+		font-size: 0.85rem;
+		font-weight: 400;
+		text-transform: uppercase;
+		padding-bottom: 5px;
 	}
 </style>
