@@ -7,19 +7,15 @@
 </script>
 
 <svelte:head>
-	<!-- importing Google Fonts -->
-	<!-- 
-			CSS rules to specify the families:
-			font-family: 'Chivo', sans-serif;
-			font-family: 'Fira Code', monospace;
-			font-family: 'Marcellus', serif;
-			font-family: 'Spectral', serif;
-	-->
-
+	<!-- CSS 
+	font-family: 'Chivo', sans-serif;
+font-family: 'IBM Plex Mono', monospace;
+font-family: 'Spectral', serif;
+-->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 	<link
-		href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Fira+Code:wght@300;500;700&family=Marcellus&family=Spectral:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400;1,700;1,800&display=swap"
+		href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Spectral:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400;1,700;1,800&display=swap"
 		rel="stylesheet"
 	/>
 </svelte:head>
@@ -123,8 +119,50 @@
 <Sliders />
 
 <style>
-	@import url("https://rsms.me/inter/inter.css");
+	/* importing custom fonts */
+	@font-face {
+		font-family: "HK Grotesk";
+		font-weight: black;
+		src: url("/fonts/HKGrotesk-Black.woff") format("woff");
+	}
 
+	@font-face {
+		font-family: "HK Grotesk";
+		font-style: italic;
+		font-weight: black;
+		src: url("/fonts/HKGrotesk-BlackItalic.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "HK Grotesk";
+		font-weight: bold;
+		src: url("/fonts/HKGrotesk-Bold.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "HK Grotesk";
+		font-style: italic;
+		font-weight: black;
+		src: url("/fonts/HKGrotesk-BoldItalic.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "HK Grotesk";
+		font-style: italic;
+		src: url("/fonts/HKGrotesk-Italic.woff") format("woff");
+	}
+
+	@font-face {
+		font-family: "HK Grotesk";
+		font-weight: normal;
+		src: url("/fonts/HKGrotesk-Regular.woff") format("woff");
+	}
+
+	h1 {
+		font-family: "HK Grotesk";
+	}
+
+	/* global and top-level component styles */
 	:global(body) {
 		margin: 0px;
 		padding: 0px;

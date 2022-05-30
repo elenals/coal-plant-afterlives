@@ -49,9 +49,9 @@
 <section>
 	<div class="wrapper">
 		<div class="container">
+			<img class="item " src="images/beloit-2013.jpg" alt="" />
+			<img class="item" src="images/beloit-2013.jpg" alt="" />
 			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
 			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
 			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
 			<img class="item" src="images/beloit-2013.jpg" alt="" />
@@ -131,7 +131,7 @@
 	.step-content {
 		background-color: #f8f9fa;
 		color: #ccc;
-		font-family: "Chivo", sans-serif;
+		font-family: "HK Grotesk";
 		font-size: 1rem;
 		border-radius: 5px;
 		width: 30vw;

@@ -325,7 +325,7 @@
 		top: 100px;
 		left: 60vw;
 		color: #e76f51;
-		font-family: "Fira Code", monospace;
+		font-family: "IBM Plex Mono", monospace;
 		font-size: 1rem;
 		font-weight: 700;
 	}
@@ -341,7 +341,7 @@
 
 	.legendLabel {
 		fill: #e76f51;
-		font-family: "Fira Code", monospace;
+		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.75rem;
 	}
 
@@ -385,7 +385,7 @@
 	.step-content {
 		background-color: #f8f9fa;
 		color: #ccc;
-		font-family: "Chivo", sans-serif;
+		font-family: "HK Grotesk";
 		font-size: 1rem;
 		border-radius: 5px;
 		width: 30vw;

@@ -34,16 +34,16 @@
 
 	h2 {
 		text-align: center;
-		font-family: "Fira Code", monospace;
+		font-family: "IBM Plex Mono", monospace;
 		font-size: 1rem;
-		font-weight: 400;
+		font-weight: bold;
 		text-transform: uppercase;
 	}
 
 	p {
 		text-align: left;
-		font-family: "Chivo", sans-serif;
-		font-size: 1.15rem;
+		font-family: "HK Grotesk";
+		font-size: 1.1rem;
 	}
 
 	a {
@@ -73,7 +73,7 @@
 
 	.container {
 		text-align: center;
-		width: 600px;
+		width: 30vw;
 		margin: auto;
 	}
 </style>
