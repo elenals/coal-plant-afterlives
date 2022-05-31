@@ -4,6 +4,7 @@
 	import Content from "./Content.svelte"; // reusable heading & content component
 	import Map from "./Map.svelte";
 	import Sliders from "./Sliders.svelte";
+	import Image from "./Image.svelte";
 </script>
 
 <svelte:head>
@@ -95,9 +96,7 @@
 	</span></Content
 >
 
-<div id="image">
-	<img src="images/morro-bay.svg" alt="" />
-</div>
+<Image />
 
 <Content>
 	<span slot="content">
@@ -193,6 +192,7 @@
 		transform: scaleX(1);
 		transform-origin: bottom left;
 	}
+
 	#image {
 		width: 50vw;
 		margin: auto;
