@@ -59,8 +59,12 @@
 
 <style>
 	section {
-		height: 100vh;
+		width: 70vw;
+		margin: auto;
+		padding-top: 5vh;
+		padding-bottom: 5vh;
 	}
+
 	.images {
 		margin: 0;
 		padding: 0;

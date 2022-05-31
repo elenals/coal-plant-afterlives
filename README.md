@@ -1,109 +1,169 @@
-*Psst — looking for a more complete solution? Check out [SvelteKit](https://kit.svelte.dev), the official framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.*
+# Coal Plant Afterlives
 
-*Looking for a shareable component template instead? You can [use SvelteKit for that as well](https://kit.svelte.dev/docs#packaging) or the older [sveltejs/component-template](https://github.com/sveltejs/component-template)*
+This project was conceptualized as a news application site to be completed during the Spring quarter of 2022 while enrolled in COMM 289P: Journalism Thesis.
 
----
+A version of this project was submitted to the Communications Department on June 1, 2022, in partial fulfillment of the requirements for a degree of Master of Arts in Communications, Journalism Track at Stanford University.
 
-# svelte app
+Many thanks to my mentor and thesis advisor, Serdar Tumgoren.
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+## Methodology & Resources
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+This news application was built primarily with [Svelte.js](https://svelte.dev/), an open-source compiler for building web apps. Interactive visualizations were built with [D3.js](https://d3js.org/), a JavaScript library for visualizing data and building graphs. Images were edited and designed using Adobe Photoshop, Adobe Illustrator, and [ai2html](http://ai2html.org/), an open-source Adobe Illustrator script that converts Illustrator documents into HTML for the web.
+
+This news application uses Russell Goldenberg's [Scrollytelling Svelte.js component](https://svelte.dev/repl/3d3736e634c9404ea8ec2ef7b87e2053?version=3.42.4).
+
+## Data Sources
+
+Satellite images were taken between 2010 and 2022, and compiled using [Google Earth Engine Pro](https://earthengine.google.com/) and satellite imagery from Maxar Technologies and Landsat Missions.
+
+Power plant retirement data was collected by the U.S. Energy Information Administration through their Form EIA-860. Detailed documentation regarding data cleaning and analysis can be found below.
+
+Data on repurposing and redevelopment projects were manually compiled from news searches and data from the U.S. Environmental Protection Agency’s [RE-Powering America Tracking Index](https://www.epa.gov/re-powering).
+
+### Power Plant Retirements
+
+To show information related to **retired, currently operating, and planned retirements of power plants across the U.S.**, I am using data provided by the U.S. Energy Information Administration (EIA), which they prepare from the Form EIA-860.
+
+The [Form EIA-860](https://www.eia.gov/electricity/data/eia860) collects generator-level information about existing and planned generators with 1 megawatt (MW) or greater of combined nameplate capacity. The EIA also supplements the annual survey form with a monthly survey, [Form EIA-860M](https://www.eia.gov/electricity/data/eia860m/). Monthly data is the most updated, but has not been fully verified by the EIA.
+
+The most recent annual dataset is from 2020, so I am using a monthly dataset from the month of February 2022 for the current inventory of power plants.
+
+First, I concated concatenate the sheets `Operating`, `Planned`, and `Retired` and deleted unnecessary columns. Then, I used [OpenRefine](https://openrefine.org/download.html) to group technology into types:
+
+- Wood/Wood Waste Biomass, Other Waste Biomass &rarr; `Biomass`
+- Solar Thermal with Energy Storage, Solar Thermal without Energy Storage, and Solar Photovoltaic &rarr; `Solar`
+- Onshore Wind Turbine, Offshore Wind Turbine &rarr; `Wind Turbine`
+- Hydroelectric Pumped Storage, Conventional Hydroelectric &rarr; `Hydroelectric`
+- Petroleum Coke, Petroleum Liquids &rarr; `Petroleum Coke & Liquids`
+- Natural Gas with Compressed Air Storage, Natural Gas Fired Combustion Turbine, Natural Gas Fired Combined Cycle, Natural Gas Steam Turbine, Natural Gas Internal Combustion Engine, Other Natural Gas &rarr; `Natural Gas`
+- Coal Integrated Gasification Combined Cycle, Conventional Steam Coal &rarr; `Coal`
+- Landfills, Municipal Solid Waste &rarr; `Landfills & Municipal Solid Waste`
+- Flywheels, Other Gases, All Other &rarr; `Other`
+
+and to give full names for state abbreviations:
+
+- AZ &rarr; `Arizona`
+
+## Building & Deploying the Svelte App
+
+To create a new project based on the [Svelte template](https://github.com/sveltejs/template) using [degit](https://github.com/Rich-Harris/degit):
 
 ```bash
 npx degit sveltejs/template svelte-app
 cd svelte-app
 ```
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
-
-
-## Get started
-
-Install the dependencies...
+Install the dependencies
 
 ```bash
 cd svelte-app
 npm install
 ```
 
-...then start [Rollup](https://rollupjs.org):
+and then start [Rollup](https://rollupjs.org) and navigate to [localhost:8080](http://localhost:8080), where you should see your app running.
 
 ```bash
 npm run dev
 ```
 
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
+### Requirements
 
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
+Install [d3](https://www.npmjs.com/package/d3):
 
 ```bash
-npm run build
+npm install --save-dev d3
 ```
 
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+Install [topojson](https://www.npmjs.com/package/topojson):
 
+```bash
+npm install --save-dev topojson
+```
 
-## Single-page app mode
+Install [svelte-image-gallery](https://www.npmjs.com/package/svelte-image-gallery):
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+```bash
+npm install --save-dev svelte-image-gallery
+```
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+### Deploy
+
+To deploy the Svelte app with GitHub Pages, first create a `gh-pages` branch in the root of the repository.
+
+```bash
+git checkout -b "gh-pages"
+```
+
+After creating the static Svelte site, download the `gh-pages` package:
+
+```bash
+npm i gh-pages
+```
+
+After installation, create a new file called `gh-pages.js` at the root of the repository with the following contents:
 
 ```js
-"start": "sirv public --single"
+const ghpages = require("gh-pages");
+ghpages.publish(
+	"public", // path to public directory
+	{
+		branch: "gh-pages",
+		repo: "https://github.com/elenals/coal-plant-afterlives", // point to your repo on GitHub
+		user: {
+			name: "NAME",
+			email: "EMAIL",
+		},
+		dotfiles: true,
+	},
+	() => {
+		console.log("Deploy Complete!");
+	}
+);
 ```
 
-## Using TypeScript
+Update the links in the index.html (located at `/public/index.html`) so that they are relative paths.
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
+```html
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
-```bash
-node scripts/setupTypeScript.js
+		<title>Coal Plant Afterlives</title>
+
+		<link rel="icon" type="image/png" href="./favicon.png" />
+		<link rel="stylesheet" href="./global.css" />
+		<link rel="stylesheet" href="./build/bundle.css" />
+
+		<script defer src="./build/bundle.js"></script>
+	</head>
+
+	<body></body>
+</html>
 ```
 
-Or remove the script via:
+In the `.gitignore` file, make sure to comment out the contents of the `/public/build/` directory.
 
-```bash
-rm scripts/setupTypeScript.js
+```
+/node_modules/
+# /public/build/
+.DS_Store
 ```
 
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
-
-## Deploying to the web
-
-### With [Vercel](https://vercel.com)
-
-Install `vercel` if you haven't already:
+Now, build and deploy your Svelte application:
 
 ```bash
-npm install -g vercel
-```
-
-Then, from within your project folder:
-
-```bash
-cd public
-vercel deploy --name my-project
-```
-
-### With [surge](https://surge.sh/)
-
-Install `surge` if you haven't already:
-
-```bash
-npm install -g surge
-```
-
-Then, from within your project folder:
-
-```bash
+# Build
 npm run build
-surge public my-project.surge.sh
+# Commit and push changes
+git add .
+git commit -m "commit message"
+git push origin gh-pages
+# Deploy
+node ./gh-pages.js
 ```
+
+If you had already set up GitHub pages previously, make sure to update the the Source to `/root` of the `gh-pages` Branch.
+
+This project's site is now published at: https://elenals.github.io/coal-plant-afterlives/.

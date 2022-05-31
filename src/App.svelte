@@ -22,13 +22,11 @@
 	/>
 </svelte:head>
 
-<Sliders />
-
 <Grid
 	step0="<p>Over the last decade, coal has quickly garnered global distaste due to its polluting nature and its role in exacerbating the climate crisis. The fossil fuel has become almost synonymous with dirty power.</p>"
 	step1="<p>Many coal plants, like those pictured here, have already retired, or are planning to within the next few years.</p>"
 	step2="<p>After retirement, most coal plants and mines are abandoned, with no plans for clean-up or redevelopment. But in recent years, a number are being repurposed for renewable energy projects, like solar photovoltaic facilities or wind turbines.</p>"
-	step3="<p>Some believe these projects will serve as blueprint for how to navigate the green energy transition, but others note that there's still far to go when it comes to addressing the toxic legacy coal decommissioning leaves behind.</p>"
+	step3="<p>Some believe these projects will serve as a blueprint for how to navigate the green energy transition, but others note that there's still far to go when it comes to addressing the toxic legacy coal decommissioning leaves behind.</p>"
 />
 
 <Content>
@@ -67,6 +65,32 @@
 	step3="<p>And even more coal plants are expected to retire over the next few decades as the U.S. seeks to clean its power grid of fossil fuels by 2030.</p>"
 />
 
+<Content>
+	<span slot="content">
+		<p>
+			In California's Morro Bay, a power plant's three 450-feet-high smokestacks
+			still remain, despite the plant shutting down more than eight years ago.
+			Morro Bay Power Plant began burning coal in the 1950s, and later converted
+			to burn natural gas.
+		</p>
+		<p>
+			Morro Bay City Council voted last year to demolish the stacks, but even
+			that might not happen until 2027, according to the city's agreement with
+			owner Vistra Company. The energy company hopes to place a <a
+				href="https://www.morro-bay.ca.us/DocumentCenter/View/15093/Vistra---Morro-Bay---Battery-Project-Presentation-022021"
+				>battery storage facility</a
+			> on the defunct power plant lands.
+		</p>
+	</span>
+</Content>
+
+<Image src="images/morro-bay.svg" alt="Three Stacks, Morro Bay Power Plant"
+	>Morro Bay Power Plant's “Three Stacks.” The smokestacks have been visible for
+	so long that a local brewing company named itself “Three Stacks and a Rock.” <i
+		>(Courtesy of Google Earth, Wikimedia Commons).</i
+	></Image
+>
+
 <Content
 	><span slot="content">
 		<p>
@@ -99,33 +123,7 @@
 	</span></Content
 >
 
-<Image src="images/morro-bay.svg" alt="Three Stacks, Morro Bay Power Plant"
-	>Morro Bay Power Plant's “Three Stacks.” The smokestacks have been visible for
-	so long that a local brewing company named itself “Three Stacks and a Rock.” <i
-		>(Courtesy of Google Earth, Wikimedia Commons).</i
-	></Image
->
-
-<Content>
-	<span slot="content">
-		<p>
-			In California's Morro Bay, a power plant's three 450-feet-high smokestacks
-			still remain, despite the plant shutting down more than eight years ago.
-			Morro Bay Power Plant began burning coal in the 1950s, and later converted
-			to burn natural gas.
-		</p>
-		<p>
-			Morro Bay City Council voted last year to demolish the stacks, but even
-			that might not happen until 2027, according to the city's agreement with
-			owner Vistra Company. The energy company hopes to place a <a
-				href="https://www.morro-bay.ca.us/DocumentCenter/View/15093/Vistra---Morro-Bay---Battery-Project-Presentation-022021"
-				>battery storage facility</a
-			> on the defunct power plant lands.
-		</p>
-	</span>
-</Content>
-
-<Content />
+<Sliders />
 
 <Footer
 	><p>
