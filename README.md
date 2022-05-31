@@ -1,6 +1,6 @@
 # Coal Plant Afterlives
 
-This project was conceptualized as a news application site to be completed during the Spring quarter of 2022 while enrolled in COMM 289P: Journalism Thesis.
+This project was conceptualized as a [news application site](https://elenals.github.io/coal-plant-afterlives/) to be completed during the Spring quarter of 2022 while enrolled in COMM 289P: Journalism Thesis.
 
 A version of this project was submitted to the Communications Department on June 1, 2022, in partial fulfillment of the requirements for a degree of Master of Arts in Communications, Journalism Track at Stanford University.
 
@@ -10,7 +10,7 @@ Many thanks to my mentor and thesis advisor, Serdar Tumgoren.
 
 This news application was built primarily with [Svelte.js](https://svelte.dev/), an open-source compiler for building web apps. Interactive visualizations were built with [D3.js](https://d3js.org/), a JavaScript library for visualizing data and building graphs. Images were edited and designed using Adobe Photoshop, Adobe Illustrator, and [ai2html](http://ai2html.org/), an open-source Adobe Illustrator script that converts Illustrator documents into HTML for the web.
 
-This news application uses Russell Goldenberg's [Scrollytelling Svelte.js component](https://svelte.dev/repl/3d3736e634c9404ea8ec2ef7b87e2053?version=3.42.4).
+This news application uses Russell Goldenberg's [Scrollytelling Svelte.js component](https://svelte.dev/repl/3d3736e634c9404ea8ec2ef7b87e2053?version=3.42.4). The `IBM Plex Mono` and `Chivo` fonts were imported from [Google Fonts](https://fonts.google.com/). The `HK Grotesk` font is a free font created by [Hanken Design Co](https://www.fontsquirrel.com/fonts/hk-grotesk).
 
 ## Data Sources
 
@@ -87,6 +87,8 @@ npm install --save-dev svelte-image-gallery
 ```
 
 ### Deploy
+
+These instructions are adapted from [this tutorial](https://www.devsamples.com/javascript/svelte/deploy-svelte-app-gh-pages).
 
 To deploy the Svelte app with GitHub Pages, first create a `gh-pages` branch in the root of the repository.
 
