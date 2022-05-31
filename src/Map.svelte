@@ -274,19 +274,16 @@
 				/>
 			{/each}
 		</svg>
-		<div id="wrapper">
-			<div id="label" />
-			<div id="legend">
-				<svg>
-					<!-- smallest MW -->
-					<text x="0" y="28" class="legendLabel">0.5 MW</text>
-					<circle cx={60} cy={25} r={min} class="circle" />
-					<!-- largest MW -->
-					<circle cx={85} cy={25} r={max} class="circle" />
-					<text x="110" y="28" class="legendLabel">1 GW</text>
-				</svg>
-			</div>
-		</div>
+
+		<div id="label" />
+		<svg width="200px" id="legend">
+			<!-- smallest MW -->
+			<text x="25" y="28" class="legendLabel">0.5 MW</text>
+			<circle cx={85} cy={25} r={min} class="circle" />
+			<!-- largest MW -->
+			<circle cx={110} cy={25} r={max} class="circle" />
+			<text x="145" y="28" class="legendLabel">1 GW</text>
+		</svg>
 	</div>
 
 	<!-- a scrolly container -->
@@ -327,14 +324,10 @@
 		overflow: hidden;
 	}
 
-	#wrapper {
-		text-align: center;
-		margin: auto;
-	}
-
 	#label {
 		position: absolute;
 		text-align: center;
+		width: 200px;
 		top: 100px;
 		left: 60vw;
 		color: white;
@@ -348,9 +341,10 @@
 	#legend {
 		position: absolute;
 		text-align: center;
-		top: 120px;
+		margin: auto;
+		width: 200px;
+		top: 125px;
 		left: 60vw;
-		margin-left: 2px;
 		visibility: hidden;
 	}
 
