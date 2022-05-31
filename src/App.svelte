@@ -9,8 +9,8 @@
 <svelte:head>
 	<!-- CSS 
 	font-family: 'Chivo', sans-serif;
-font-family: 'IBM Plex Mono', monospace;
-font-family: 'Spectral', serif;
+	font-family: 'IBM Plex Mono', monospace;
+	font-family: 'Spectral', serif;
 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -22,15 +22,12 @@ font-family: 'Spectral', serif;
 
 <Grid
 	step0="<p>Over the last decade, coal has quickly garnered global distaste due to its polluting nature and its role in exacerbating the climate crisis. The fossil fuel has become almost synonymous with dirty power.</p>"
-	step1="<p>Many coal plants, like those pictured here, have already retired, or are planning to within the next few years. After retirement, most coal plants and mines are abandoned, with no plans for clean-up or redevelopment.</p>"
-	step2="<p>But, a number are being repurposed for renewable energy projects, like solar photovoltaic facilities or wind turbines.</p>"
+	step1="<p>Many coal plants, like those pictured here, have already retired, or are planning to within the next few years.</p>"
+	step2="<p>After retirement, most coal plants and mines are abandoned, with no plans for clean-up or redevelopment. But in recent years, a number are being repurposed for renewable energy projects, like solar photovoltaic facilities or wind turbines.</p>"
 	step3="<p>Some believe these projects will serve as blueprint for how to navigate the green energy transition, but others note that there’s still far to go when it comes to addressing the toxic legacy coal decommissioning leaves behind.</p>"
 />
 
-<Content
-	hed="How Dirty Coal Power Could Get a Greener Second Life"
-	byline="By Elena Shao"
->
+<Content>
 	<span slot="content">
 		<p>
 			Across the country, coal-fired power plants are powering down, squeezed
@@ -158,14 +155,11 @@ font-family: 'Spectral', serif;
 		src: url("/fonts/HKGrotesk-Regular.woff") format("woff");
 	}
 
-	h1 {
-		font-family: "HK Grotesk";
-	}
-
 	/* global and top-level component styles */
 	:global(body) {
 		margin: 0px;
 		padding: 0px;
+		background-color: #ffe2ce;
 	}
 
 	a {

@@ -5,6 +5,7 @@
 	export let step3 = "";
 
 	import Scrolly from "./Scrolly.svelte"; // Russell Goldenberg's Scrolly component (from https://t.co/l8fOJaiwkX)
+	import Hed from "./Hed.svelte";
 
 	/* importing other requirements */
 	import { onMount } from "svelte";
@@ -13,24 +14,63 @@
 	let currentStep;
 	let highlighted;
 	let items;
+	let step;
+	let hed;
 
 	/* an array with the text content for each step */
-	const steps = [step0, step1, step2, step3];
+	const steps = [step0, step1, step2, step3, ""];
 
 	onMount(async () => {
 		items = d3.selectAll(".item");
 		highlighted = d3.selectAll(".highlight");
+		step = d3.selectAll(".step-content");
+		hed = d3.select("#hed");
 	});
 
 	const handleStep0 = () => {
-		items.transition().duration(400).style("filter", "brightness(60%)");
+		step.style("visibility", "visible");
+		items.transition().duration(400).style("filter", "brightness(40%)");
 	};
 
 	const handleStep1 = () => {
+		step.style("visibility", "visible");
+		items.transition().duration(400).style("filter", "brightness(100%)");
+	};
+
+	const handleStep2 = () => {
+		step.style("visibility", "visible");
+		items.transition().duration(400).style("filter", "brightness(40%)");
 		highlighted.transition().duration(400).style("filter", "brightness(100%)");
 	};
 
-	const handleStep3 = () => {};
+	const handleStep3 = () => {
+		step
+			.transition()
+			.style("visibility", "visible")
+			.duration(600)
+			.style("opacity", 100);
+		hed.style("visibility", "hidden");
+		items
+			.transition()
+			.duration(600)
+			.style("opacity", 100)
+			.style("filter", "brightness(40%)");
+	};
+
+	const handleStep4 = () => {
+		step
+			.transition()
+			.duration(600)
+			.style("opacity", 0)
+			.style("visibility", "hidden");
+		items.transition().duration(1000).style("opacity", 0);
+		hed
+			.style("visibility", "visible")
+			.style("opacity", 0)
+			.transition()
+			.duration(500)
+			.style("opacity", 100);
+	};
 
 	/* run code reactively
 	the "if...else" block will run every time the variable "currentStep" changes
@@ -40,31 +80,45 @@
 	} else if (currentStep == 1) {
 		handleStep1();
 	} else if (currentStep == 2) {
-		console.log("Step 2");
+		handleStep2();
 	} else if (currentStep == 3) {
 		handleStep3();
+	} else if (currentStep == 4) {
+		handleStep4();
 	}
 </script>
 
 <section>
 	<div class="wrapper">
 		<div class="container">
-			<img class="item " src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
+			<img class="item " src="images/four-corners-2022.jpg" alt="" />
+			<img class="item" src="images/harrington-2022.jpg" alt="" />
+			<img class="item highlight" src="images/beloit-2022.jpg" alt="" />
+			<img class="item highlight" src="images/brayton-2022.jpg" alt="" />
+			<img class="item highlight" src="images/coal-creek-2022.jpg" alt="" />
+			<img class="item" src="images/indian-river-2022.jpg" alt="" />
+			<img class="item" src="images/naughton-2022.jpg" alt="" />
+			<img class="item highlight" src="images/hayden-2022.jpg" alt="" />
+			<img class="item" src="images/rio-bravo-poso-2016.jpg" alt="" />
+			<img class="item highlight" src="images/sherco-2022.jpg" alt="" />
+			<img
+				class="item"
+				src="images/san-juan-generating-station-2022.jpg"
+				alt=""
+			/>
+			<img class="item" src="images/springerville-2022.jpg" alt="" />
+			<img class="item highlight" src="images/wood-river-2022.jpg" alt="" />
+			<img class="item" src="images/waukegan-2022.jpg" alt="" />
 			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
-			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
-			<img class="item" src="images/beloit-2013.jpg" alt="" />
+			<img class="item" src="images/mount-tom-2022.jpg" alt="" />
+		</div>
+		<div id="hed">
+			<Hed
+				><span slot="hed">
+					How Dirty Coal Power Could Get a Greener Second Life
+				</span>
+				<span slot="byline">Elena Shao</span></Hed
+			>
 		</div>
 	</div>
 	<!-- a scrolly container -->
@@ -92,7 +146,7 @@
 		text-align: center;
 		justify-content: center;
 		max-width: 100vw;
-		max-height: 100vh;
+		height: 100vh;
 		margin: auto;
 		top: 0; /* keep this */
 		padding: 0;
@@ -114,14 +168,25 @@
 		flex: 0 25%;
 		margin: auto;
 		min-width: 0;
-		filter: brightness(60%) contrast(110%);
+		filter: brightness(40%) contrast(120%);
+	}
+
+	#hed {
+		margin: auto;
+		padding: 0;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 25vh;
+		opacity: 0%;
+		visibility: hidden;
 	}
 
 	/* STEP CONTENT STYLING */
 
 	/* the container for each step */
 	.step {
-		height: 80vh;
+		height: 110vh;
 		display: flex;
 		place-items: center;
 		justify-content: center;

@@ -32,6 +32,7 @@
 	let label;
 	let legend;
 	let autoplay = true;
+	let step;
 
 	/* BASE MAP */
 
@@ -58,6 +59,7 @@
 		legend = d3.select("#legend");
 		label = d3.select("#label");
 		label.html(`Coal Plants in ${pointer}`).attr("id", "label");
+		step = d3.selectAll(".step-content");
 	});
 
 	/* TIMELAPSE SET-UP */
@@ -100,6 +102,7 @@
 	/* this function runs the timelapse timer and resets it once the 
   animation reaches the last year */
 	const handleStep0 = () => {
+		step.style("visibility", "visible");
 		if (autoplay === true) {
 			timer = setInterval(() => {
 				update(data, pointer);
@@ -215,7 +218,7 @@
 		label
 			.html(`Retired Coal Plants`)
 			.attr("id", "label")
-			.style("color", "#e3c500")
+			.style("color", "#ffe436")
 			.transition()
 			.duration(200)
 			.style("opacity", 0);
@@ -357,8 +360,8 @@
 	/* MAP STYLING */
 
 	.states {
-		fill: #f8f9fa;
-		stroke: #dee2e6;
+		fill: #fff3ec;
+		stroke: #fbd2b6;
 		stroke-width: 1px;
 	}
 
