@@ -1,10 +1,6 @@
 <script>
-	export let beforeImg;
-	export let afterImg;
-	export let title = "";
-	export let details = "";
-	export let w = "550px";
-	export let h = "300px";
+	export let beforeImg = "";
+	export let afterImg = "";
 
 	/* importing dependencies */
 	import { onMount } from "svelte";
@@ -13,31 +9,20 @@
 	let layer;
 
 	onMount(async () => {
-		layer = d3.selectAll("#img-after"); // selecting the after image as the layer
+		// the following code "clips" the layer so only part of it is visible
 		d3.selectAll(".slider").on("mousemove", (event) => {
-			// the following code "clips" the layer so only part of it is visible
-			layer.style("clip-path", `inset(0 0 0 ${event.pageX - 255}px)`);
+			layer = d3.selectAll(".after"); // selecting the after image as the layer
+			console.log(event.pageX);
+			layer.style("clip-path", `inset(0 0 0 ${event.offsetX}px)`); // ${event.pageX}
 		});
 	});
 </script>
 
-<div style="width:{w}; height:{h}">
-	<div>
-		<h4>{title}</h4>
-		<p>{details}</p>
-	</div>
-	<div class="slider">
-		<div
-			class="layer"
-			id="img-before"
-			style="background-image: url({beforeImg});"
-		/>
-		<div
-			class="layer"
-			id="img-after"
-			style="background-image: url({afterImg});"
-		/>
-	</div>
+<div />
+
+<div class="slider">
+	<img class="before" src={beforeImg} alt="" />
+	<img class="after" src={afterImg} alt="" />
 </div>
 
 <style>
@@ -45,39 +30,23 @@
 		cursor: none;
 		position: relative;
 		overflow: visible;
+		width: 100%;
 		height: 100%;
+	}
+
+	img {
 		width: 100%;
 	}
-	.slider .layer {
-		height: 100%;
-	}
-	#img-before {
+
+	.before {
 		max-width: 100%;
 		min-width: 100%;
 		position: absolute;
-		background-size: 100%, auto;
 	}
-	#img-after {
+
+	.after {
 		max-width: 100%;
 		min-width: 100%;
 		position: absolute;
-		background-size: 100%, auto;
-	}
-	h4 {
-		padding: 0;
-		margin: 0;
-		text-align: left;
-		font-family: "Chivo", sans-serif;
-		font-size: 1.15rem;
-	}
-	p {
-		padding: 0;
-		margin: 0;
-		text-align: left;
-		font-family: "Fira Code", monospace;
-		font-size: 0.85rem;
-		font-weight: 400;
-		text-transform: uppercase;
-		padding-bottom: 5px;
 	}
 </style>

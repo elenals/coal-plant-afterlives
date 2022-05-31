@@ -1,46 +1,100 @@
 <script>
-	/* IMPORTS */
-	import Slider from "./Slider.svelte"; // reusable heading & content component
+	import Slider from "./Slider.svelte";
 </script>
 
 <section>
 	<!-- images must be in the "public" folder to be accessible here -->
-	<div class="container">
-		<Slider
-			beforeImg="images/beloit-2013.jpg"
-			afterImg="images/beloit-2022.jpg"
-			title="Rock River Generating Station in Beloit, WI"
-			details="Planned solar PV farm"
-		/>
-		<Slider
-			beforeImg="images/mount-tom-2014.jpg"
-			afterImg="images/mount-tom-2022.jpg"
-			title="Mount Tom Station in Holyoke, MA"
-			details="Planned solar PV farm"
-		/>
-		<Slider
-			beforeImg="images/rio-bravo-poso-2016.jpg"
-			afterImg="images/rio-bravo-poso-2022.jpg"
-			title="Rio Bravov Poso Power Plant in Bakesfield, CA"
-			details="No listed plans for redevelopment"
-		/>
-		<Slider
-			beforeImg="images/wood-river-2015.jpg"
-			afterImg="images/wood-river-2022.jpg"
-			title="Wood River Power Station in East Alton, IL"
-			details="Potential solar pv farm"
-		/>
+
+	<div class="images">
+		<div class="img">
+			<h4>Title</h4>
+			<p>Details</p>
+			<Slider
+				beforeImg="images/beloit-2013.jpg"
+				afterImg="images/beloit-2022.jpg"
+			/>
+		</div>
+		<div class="img">
+			<h4>Title</h4>
+			<p>Details</p>
+			<Slider
+				beforeImg="images/beloit-2013.jpg"
+				afterImg="images/beloit-2022.jpg"
+			/>
+		</div>
+		<div class="img">
+			<h4>Title</h4>
+			<p>Details</p>
+			<Slider
+				beforeImg="images/beloit-2013.jpg"
+				afterImg="images/beloit-2022.jpg"
+			/>
+		</div>
+		<div class="img">
+			<h4>Title</h4>
+			<p>Details</p>
+			<Slider
+				beforeImg="images/beloit-2013.jpg"
+				afterImg="images/beloit-2022.jpg"
+			/>
+		</div>
+		<div class="img">
+			<h4>Title</h4>
+			<p>Details</p>
+			<Slider
+				beforeImg="images/beloit-2013.jpg"
+				afterImg="images/beloit-2022.jpg"
+			/>
+		</div>
+		<div class="img">
+			<h4>Title</h4>
+			<p>Details</p>
+			<Slider
+				beforeImg="images/beloit-2013.jpg"
+				afterImg="images/beloit-2022.jpg"
+			/>
+		</div>
 	</div>
 </section>
 
 <style>
-	.container {
+	section {
+		height: 100vh;
+	}
+	.images {
+		margin: 0;
+		padding: 0;
 		display: flex;
 		flex-wrap: wrap;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
-		column-gap: 20px;
-		row-gap: 80px;
+	}
+
+	.img {
+		flex: 0 32%;
+		margin: auto;
+		min-width: 0;
+		padding-bottom: 18%; /* 32:18, i.e. 16:9 */
+		margin-bottom: 2%; /* (100-32*3)/2 */
+	}
+
+	h4 {
+		padding: 0;
+		margin: 0;
+		text-align: left;
+		font-family: "Chivo", sans-serif;
+		font-size: 1.15rem;
+	}
+
+	p {
+		padding: 0;
+		margin: 0;
+		text-align: left;
+		font-family: "Fira Code", monospace;
+		font-size: 0.85rem;
+		font-weight: 400;
+		text-transform: uppercase;
+		padding-bottom: 5px;
 	}
 </style>

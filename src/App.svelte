@@ -22,6 +22,8 @@
 	/>
 </svelte:head>
 
+<Sliders />
+
 <Grid
 	step0="<p>Over the last decade, coal has quickly garnered global distaste due to its polluting nature and its role in exacerbating the climate crisis. The fossil fuel has become almost synonymous with dirty power.</p>"
 	step1="<p>Many coal plants, like those pictured here, have already retired, or are planning to within the next few years.</p>"
@@ -65,7 +67,7 @@
 	step3="<p>And even more coal plants are expected to retire over the next few decades as the U.S. seeks to clean its power grid of fossil fuels by 2030.</p>"
 />
 
-<Content hed="" byline=""
+<Content
 	><span slot="content">
 		<p>
 			When aging coal plants shut down, some are demolished and flattened. They
@@ -123,8 +125,6 @@
 	</span>
 </Content>
 
-<Sliders />
-
 <Content />
 
 <Footer
@@ -139,9 +139,9 @@
 		<b>Sources:</b> Satellite images were taken between 2010 and 2022, and
 		compiled using
 		<a href="https://earthengine.google.com/ ">Google Earth Engine Pro</a>
-		and satellite imagery from Maxar Technologies and Landsat Missions. Power
-		plant retirement data was collected by the U.S. Energy Information
-		Administration through their
+		and satellite imagery from Maxar Technologies and Landsat Missions. Power plant
+		retirement data was collected by the U.S. Energy Information Administration through
+		their
 		<a href="https://www.eia.gov/electricity/data/eia860/">Form EIA-860</a>.
 		Detailed documentation regarding data cleaning and analysis can be found
 		<a
