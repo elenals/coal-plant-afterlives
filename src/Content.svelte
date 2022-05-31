@@ -27,5 +27,7 @@
 		width: 30vw;
 		margin: auto;
 		overflow: hidden;
+		padding-top: 5vh;
+		padding-bottom: 10vh;
 	}
 </style>

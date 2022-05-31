@@ -24,7 +24,7 @@
 	step0="<p>Over the last decade, coal has quickly garnered global distaste due to its polluting nature and its role in exacerbating the climate crisis. The fossil fuel has become almost synonymous with dirty power.</p>"
 	step1="<p>Many coal plants, like those pictured here, have already retired, or are planning to within the next few years.</p>"
 	step2="<p>After retirement, most coal plants and mines are abandoned, with no plans for clean-up or redevelopment. But in recent years, a number are being repurposed for renewable energy projects, like solar photovoltaic facilities or wind turbines.</p>"
-	step3="<p>Some believe these projects will serve as blueprint for how to navigate the green energy transition, but others note that there’s still far to go when it comes to addressing the toxic legacy coal decommissioning leaves behind.</p>"
+	step3="<p>Some believe these projects will serve as blueprint for how to navigate the green energy transition, but others note that there's still far to go when it comes to addressing the toxic legacy coal decommissioning leaves behind.</p>"
 />
 
 <Content>
@@ -95,6 +95,10 @@
 	</span></Content
 >
 
+<div id="image">
+	<img src="images/morro-bay.svg" alt="" />
+</div>
+
 <Content>
 	<span slot="content">
 		<p>
@@ -113,7 +117,10 @@
 		</p>
 	</span>
 </Content>
+
 <Sliders />
+
+<Content />
 
 <style>
 	/* importing custom fonts */
@@ -185,5 +192,9 @@
 	a:hover:after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
+	}
+	#image {
+		width: 50vw;
+		margin: auto;
 	}
 </style>
