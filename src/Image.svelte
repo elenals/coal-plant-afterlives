@@ -1,12 +1,14 @@
+<script>
+	export let src;
+	export let alt;
+</script>
+
 <section>
 	<div id="image">
-		<img src="images/morro-bay.svg" alt="" />
+		<img {src} {alt} />
 		<div id="caption">
 			<p>
-				Morro Bay Power Plant's “Three Stacks.” The smokestacks have been
-				visible for so long that a local brewing company named itself “Three
-				Stacks and a Rock.” <i>(Courtesy of Google Earth, Wikimedia Commons).</i
-				>
+				<slot />
 			</p>
 		</div>
 	</div>
@@ -14,6 +16,7 @@
 
 <style>
 	p {
+		color: #e76f51;
 		font-size: 0.85rem;
 		font-family: "IBM Plex Mono", monospace;
 	}

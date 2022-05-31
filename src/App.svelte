@@ -5,6 +5,7 @@
 	import Map from "./Map.svelte";
 	import Sliders from "./Sliders.svelte";
 	import Image from "./Image.svelte";
+	import Footer from "./Footer.svelte";
 </script>
 
 <svelte:head>
@@ -96,7 +97,12 @@
 	</span></Content
 >
 
-<Image />
+<Image src="images/morro-bay.svg" alt="Three Stacks, Morro Bay Power Plant"
+	>Morro Bay Power Plant's “Three Stacks.” The smokestacks have been visible for
+	so long that a local brewing company named itself “Three Stacks and a Rock.” <i
+		>(Courtesy of Google Earth, Wikimedia Commons).</i
+	></Image
+>
 
 <Content>
 	<span slot="content">
@@ -120,6 +126,51 @@
 <Sliders />
 
 <Content />
+
+<Footer
+	><p>
+		This project was conceptualized as a news application site to be completed
+		during the Spring quarter of 2022 while enrolled in COMM 289P: Journalism
+		Thesis. It was submitted to the Communications Department on June 1, 2022,
+		in partial fulfillment of the requirements for a degree of Master of Arts in
+		Communications, Journalism Track at Stanford University.
+	</p>
+	<p>
+		<b>Sources:</b> Satellite images were taken between 2010 and 2022, and
+		compiled using
+		<a href="https://earthengine.google.com/ ">Google Earth Engine Pro</a>
+		and satellite imagery from Maxar Technologies and Landsat Missions. Power
+		plant retirement data was collected by the U.S. Energy Information
+		Administration through their
+		<a href="https://www.eia.gov/electricity/data/eia860/">Form EIA-860</a>.
+		Detailed documentation regarding data cleaning and analysis can be found
+		<a
+			href="https://github.com/elenals/coal-plant-afterlives/blob/main/README.md"
+			>here</a
+		>. Data on repurposing and redevelopment projects were manually compiled
+		from news searches and data from the U.S. Environmental Protection Agency's
+		<a href="https://www.epa.gov/re-powering"
+			>RE-Powering America Tracking Index</a
+		>.
+	</p>
+	<p>
+		<b>Methodology:</b> All of the code and data for this project site is
+		accessible here. This news application was built primarily with
+		<a href="https://svelte.dev/">Svelte.js</a>, an open-source compiler for
+		building web apps. Interactive visualizations were built with
+		<a href="https://d3js.org/">D3.js</a>, a JavaScript library for visualizing
+		data and building graphs. Images were edited and designed using Adobe
+		Photoshop, Adobe Illustrator, and <a href="http://ai2html.org/">ai2html</a>,
+		an open-source Adobe Illustrator script that converts Illustrator documents
+		into html for the web.
+	</p>
+	<p>
+		Many thanks to my mentor and thesis advisor, <a
+			href="https://journalism.stanford.edu/people/serdar-tumgoren"
+			>Serdar Tumgoren.</a
+		>
+	</p>
+</Footer>
 
 <style>
 	/* importing custom fonts */
@@ -191,10 +242,5 @@
 	a:hover:after {
 		transform: scaleX(1);
 		transform-origin: bottom left;
-	}
-
-	#image {
-		width: 50vw;
-		margin: auto;
 	}
 </style>
