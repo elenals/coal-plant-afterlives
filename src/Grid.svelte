@@ -29,7 +29,10 @@
 
 	const handleStep0 = () => {
 		step.style("visibility", "visible");
-		items.transition().duration(400).style("filter", "brightness(40%)");
+		items
+			.transition()
+			.duration(400)
+			.style("filter", "brightness(40%) contrast(110%)");
 	};
 
 	const handleStep1 = () => {
@@ -39,7 +42,10 @@
 
 	const handleStep2 = () => {
 		step.style("visibility", "visible");
-		items.transition().duration(400).style("filter", "brightness(40%)");
+		items
+			.transition()
+			.duration(400)
+			.style("filter", "brightness(40%) contrast(110%)");
 		highlighted.transition().duration(400).style("filter", "brightness(100%)");
 	};
 
@@ -54,7 +60,7 @@
 			.transition()
 			.duration(600)
 			.style("opacity", 100)
-			.style("filter", "brightness(40%)");
+			.style("filter", "brightness(40%) contrast(110%)");
 	};
 
 	const handleStep4 = () => {
@@ -68,7 +74,7 @@
 			.style("visibility", "visible")
 			.style("opacity", 0)
 			.transition()
-			.duration(500)
+			.duration(800)
 			.style("opacity", 100);
 	};
 

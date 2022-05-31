@@ -102,14 +102,15 @@
 	/* this function runs the timelapse timer and resets it once the 
   animation reaches the last year */
 	const handleStep0 = () => {
-		step.style("visibility", "visible");
+		step.style("visibility", "visible").style("opacity", 100);
 		if (autoplay === true) {
 			timer = setInterval(() => {
 				update(data, pointer);
 				label
 					.html(`Coal Plants in ${pointer}`)
 					.attr("id", "label")
-					.style("color", "#e76f51")
+					.style("color", "white")
+					.style("background-color", "#e76f51")
 					.transition()
 					.duration(300)
 					.style("opacity", 1); // updating the label with the year
@@ -149,7 +150,8 @@
 		label
 			.html(`Coal Plants in ${end}`)
 			.attr("id", "label")
-			.style("color", "#e76f51")
+			.style("color", "white")
+			.style("background-color", "#e76f51")
 			.transition()
 			.duration(300)
 			.style("opacity", 1); // updating the label with the year
@@ -177,7 +179,8 @@
 		label
 			.html(`Retired Coal Plants`)
 			.attr("id", "label")
-			.style("color", "#e3c500")
+			.style("color", "white")
+			.style("background-color", "#e3c500")
 			.transition()
 			.duration(300)
 			.style("opacity", 1);
@@ -218,7 +221,8 @@
 		label
 			.html(`Retired Coal Plants`)
 			.attr("id", "label")
-			.style("color", "#ffe436")
+			.style("color", "white")
+			.style("background-color", "#e3c500")
 			.transition()
 			.duration(200)
 			.style("opacity", 0);
@@ -270,16 +274,18 @@
 				/>
 			{/each}
 		</svg>
-		<div id="label" />
-		<div id="legend">
-			<svg>
-				<!-- smallest MW -->
-				<text x="0" y="28" class="legendLabel">0.5 MW</text>
-				<circle cx={60} cy={25} r={min} class="circle" />
-				<!-- largest MW -->
-				<circle cx={85} cy={25} r={max} class="circle" />
-				<text x="110" y="28" class="legendLabel">1 GW</text>
-			</svg>
+		<div id="wrapper">
+			<div id="label" />
+			<div id="legend">
+				<svg>
+					<!-- smallest MW -->
+					<text x="0" y="28" class="legendLabel">0.5 MW</text>
+					<circle cx={60} cy={25} r={min} class="circle" />
+					<!-- largest MW -->
+					<circle cx={85} cy={25} r={max} class="circle" />
+					<text x="110" y="28" class="legendLabel">1 GW</text>
+				</svg>
+			</div>
 		</div>
 	</div>
 
@@ -321,24 +327,30 @@
 		overflow: hidden;
 	}
 
+	#wrapper {
+		text-align: center;
+		margin: auto;
+	}
+
 	#label {
 		position: absolute;
-		text-align: left;
-		width: 200px;
+		text-align: center;
 		top: 100px;
 		left: 60vw;
-		color: #e76f51;
+		color: white;
 		font-family: "IBM Plex Mono", monospace;
+		background-color: #e76f51;
 		font-size: 1rem;
 		font-weight: 700;
+		padding: 3px 5px 3px 5px;
 	}
 
 	#legend {
 		position: absolute;
-		text-align: left;
-		width: 200px;
-		top: 115px;
+		text-align: center;
+		top: 120px;
 		left: 60vw;
+		margin-left: 2px;
 		visibility: hidden;
 	}
 
@@ -360,7 +372,7 @@
 	/* MAP STYLING */
 
 	.states {
-		fill: #fff3ec;
+		fill: #fff4ed;
 		stroke: #fbd2b6;
 		stroke-width: 1px;
 	}
@@ -378,7 +390,7 @@
 
 	/* the container for each step */
 	.step {
-		height: 80vh;
+		height: 100vh;
 		display: flex;
 		place-items: center;
 		justify-content: center;
