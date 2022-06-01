@@ -161,7 +161,7 @@
 	</p>
 	<p>
 		<b>Methodology:</b> All of the code and data for this project site is
-		accessible here. This news application was built primarily with
+		accessible <a href="https://github.com/elenals/coal-plant-afterlives">here</a>. This news application was built primarily with
 		<a href="https://svelte.dev/">Svelte.js</a>, an open-source compiler for
 		building web apps. Interactive visualizations were built with
 		<a href="https://d3js.org/">D3.js</a>, a JavaScript library for visualizing
@@ -181,6 +181,7 @@
 <style>
 	
 	/* importing custom fonts */
+	/*
 	@font-face {
 		font-family: "HK Grotesk";
 		font-weight: black;
@@ -225,6 +226,7 @@
 		padding: 0px;
 		background-color: #ffe2ce;
 	}
+	*/
 
 	a {
 		display: inline-block;
