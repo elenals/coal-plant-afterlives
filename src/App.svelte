@@ -13,6 +13,7 @@
 	font-family: 'Chivo', sans-serif;
 	font-family: 'IBM Plex Mono', monospace;
 	font-family: 'Spectral', serif;
+	font-family: 'HK Grotesk', sans-serif;
 -->
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +21,8 @@
 		href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Spectral:ital,wght@0,300;0,400;0,700;0,800;1,300;1,400;1,700;1,800&display=swap"
 		rel="stylesheet"
 	/>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/hk-grotesk.min.css"> 
+
 </svelte:head>
 
 <Grid
@@ -158,7 +161,7 @@
 	</p>
 	<p>
 		<b>Methodology:</b> All of the code and data for this project site is
-		accessible here. This news application was built primarily with
+		accessible <a href="https://github.com/elenals/coal-plant-afterlives">here</a>. This news application was built primarily with
 		<a href="https://svelte.dev/">Svelte.js</a>, an open-source compiler for
 		building web apps. Interactive visualizations were built with
 		<a href="https://d3js.org/">D3.js</a>, a JavaScript library for visualizing
@@ -176,7 +179,9 @@
 </Footer>
 
 <style>
+	
 	/* importing custom fonts */
+	/*
 	@font-face {
 		font-family: "HK Grotesk";
 		font-weight: black;
@@ -221,6 +226,7 @@
 		padding: 0px;
 		background-color: #ffe2ce;
 	}
+	*/
 
 	a {
 		display: inline-block;
