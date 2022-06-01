@@ -27,7 +27,7 @@
 
 <style>
 	.slider {
-		cursor: none;
+		cursor: resize;
 		position: relative;
 		overflow: visible;
 		width: 100%;

@@ -20,8 +20,8 @@
 		stroke: black;
 	}
 	:global(.tooltip p) {
-		font-family: "IBM Plex Mono", monospace;
+		font-family: "HK Grotesk", sans-serif;
 		margin: 0;
-		font-size: 12px;
+		font-size: 1rem;
 	}
 </style>
