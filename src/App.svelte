@@ -46,7 +46,7 @@
 				>report</a
 			>
 			from the Union of Concerned Scientists found that 95% of shuttered coal sites
-			remain unremediated, as of four years ago.
+			were unremediated, as of four years ago.
 		</p>
 		<p>
 			That could change. In recent years, utilities and private companies alike
@@ -59,9 +59,9 @@
 </Content>
 
 <Map
-	step0="<p>Coal-fired generation increased steadily from 1990 to 2011, when U.S. coal-fired capacity peaked at 318 gigawatts.</p>"
-	step1="<p>That year, coal provided 22% of the country’s energy production. While it far surpassed crude oil, nuclear power and renewable energy, 2011 was the first year coal fell behind natural gas, which sourced almost a quarter of U.S. energy production.</p>"
-	step2="<p>Since then, coal consumption and generation has declined substantially. Many old coal fired plants retired or switched to cheaper fuels, and few plants came online in their place. At least 615 coal plants retired between 2011 and 2022, totaling more than 105 gigawatts of capacity.</p>"
+	step0="<p>Coal-fired generation increased steadily from 1950 to 2011, when U.S. coal-fired capacity peaked at 318 gigawatts.</p>"
+	step1="<p>That year, coal provided 22% of the country's energy production. While it far surpassed crude oil, nuclear power and renewable energy, for the first time, coal fell behind natural gas, which sourced almost a quarter of U.S. energy production.</p>"
+	step2="<p>Since then, coal consumption and generation has declined substantially. Many old coal-fired plants retired or switched to cheaper fuels, and few plants came online in their place. At least 615 coal plants retired between 2011 and 2022, totaling more than 105 gigawatts of capacity.</p>"
 	step3="<p>And even more coal plants are expected to retire over the next few decades as the U.S. seeks to clean its power grid of fossil fuels by 2030.</p>"
 />
 
@@ -111,6 +111,13 @@
 			Scientists. “Ultimately, the polluters should be on the hook to pay for
 			remediation.”
 		</p>
+	</span></Content
+>
+
+<Sliders />
+
+<Content
+	><span slot="content">
 		<p>
 			Due to limited public funds and lack of incentives, most retired coal
 			plants are often left to crumble away, unused.
@@ -119,11 +126,9 @@
 			Yet, opportunity abounds on shuttered coal plants, where transmission
 			lines and infrastructure already exist and could be repurposed for use by
 			a renewable energy project.
-		</p>
-	</span></Content
+		</p></span
+	></Content
 >
-
-<Sliders />
 
 <Footer
 	><p>

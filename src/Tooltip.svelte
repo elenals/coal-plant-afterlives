@@ -22,6 +22,7 @@
 	:global(.tooltip p) {
 		font-family: "HK Grotesk", sans-serif;
 		margin: 0;
+		padding: 5px;
 		font-size: 1rem;
 	}
 </style>

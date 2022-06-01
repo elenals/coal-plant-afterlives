@@ -279,9 +279,9 @@
 		<svg width="200px" id="legend">
 			<!-- smallest MW -->
 			<text x="25" y="28" class="legendLabel">0.5 MW</text>
-			<circle cx={85} cy={25} r={min} class="circle" />
+			<circle cx={90} cy={25} r={min} class="circle" />
 			<!-- largest MW -->
-			<circle cx={110} cy={25} r={max} class="circle" />
+			<circle cx={115} cy={25} r={max} class="circle" />
 			<text x="145" y="28" class="legendLabel">1 GW</text>
 		</svg>
 	</div>

@@ -27,7 +27,7 @@
 			<h4>
 				Coal Creek Station <span
 					class="info"
-					content="<p>Coal Creek was supposed to close in 2022, after operating for more than 40 years. Its former owner, Great River Energy, considered using the transmission lines that were already there to supply the abundant wind power nearby after retiring its coal operations. But, due to a confluence of issues — anti-renewable laws and regulations, political pressure from state officials concerned with preserving coal jobs — halted that plan. Instead, state regulators approved the sale of Coal Creek to Rainbow Energy Marketing Corp., which plans to use government subsidies to retrofit the plant with a carbon capture system.</p>"
+					content="<p>Coal Creek was supposed to close in 2022, after operating for more than 40 years. Its former owner, Great River Energy, considered using the transmission lines that were already there to supply the abundant wind power nearby after retiring its coal operations. But, a confluence of issues — anti-renewable laws and regulations, political pressure from state officials concerned with preserving coal jobs — halted that plan. Instead, state regulators approved the sale of Coal Creek to Rainbow Energy Marketing Corp., which plans to use government subsidies to retrofit the plant with a carbon capture system.</p>"
 					use:tooltip>i</span
 				>
 			</h4>
