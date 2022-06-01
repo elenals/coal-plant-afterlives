@@ -117,6 +117,10 @@
 			<img class="item" src="images/waukegan-2022.jpg" alt="" />
 			<img class="item highlight" src="images/beloit-2013.jpg" alt="" />
 			<img class="item" src="images/mount-tom-2022.jpg" alt="" />
+			<img class="item " src="images/four-corners-2022.jpg" alt="" />
+			<img class="item" src="images/harrington-2022.jpg" alt="" />
+			<img class="item highlight" src="images/beloit-2022.jpg" alt="" />
+			<img class="item highlight" src="images/brayton-2022.jpg" alt="" />
 		</div>
 		<div id="hed">
 			<Hed
