@@ -7,52 +7,58 @@
 
 	<div class="images">
 		<div class="img">
-			<h4>Title</h4>
-			<p>Details</p>
+			<h4>Mount Tom Station</h4>
+			<p>SOLAR PROJECT & BATTERY ENERGY STORAGE</p>
 			<Slider
-				beforeImg="images/beloit-2013.jpg"
-				afterImg="images/beloit-2022.jpg"
+				beforeImg="images/mount-tom-2014.jpg"
+				afterImg="images/mount-tom-2022.jpg"
 			/>
+			<div class="location">Holyoke, MA</div>
 		</div>
 		<div class="img">
-			<h4>Title</h4>
-			<p>Details</p>
+			<h4>Coal Creek Station</h4>
+			<p>POTENTIAL WIND, CARBON CAPTURE</p>
 			<Slider
-				beforeImg="images/beloit-2013.jpg"
-				afterImg="images/beloit-2022.jpg"
+				beforeImg="images/coal-creek-2021.jpg"
+				afterImg="images/coal-creek-2022.jpg"
 			/>
+			<div class="location">Underwood, ND</div>
 		</div>
 		<div class="img">
-			<h4>Title</h4>
-			<p>Details</p>
+			<h4>Brayton Point Power Plant</h4>
+			<p>OFFSHORE WIND MANUFACTURING</p>
 			<Slider
-				beforeImg="images/beloit-2013.jpg"
-				afterImg="images/beloit-2022.jpg"
+				beforeImg="images/brayton-2018.jpg"
+				afterImg="images/brayton-2022.jpg"
 			/>
+			<div class="location">Somerset, MA</div>
 		</div>
 		<div class="img">
-			<h4>Title</h4>
-			<p>Details</p>
+			<h4>Sherburne County Generating Station</h4>
+			<p>SOLAR PROJECT</p>
 			<Slider
-				beforeImg="images/beloit-2013.jpg"
-				afterImg="images/beloit-2022.jpg"
+				beforeImg="images/sherco-2012.jpg"
+				afterImg="images/sherco-2022.jpg"
 			/>
+			<div class="location">Becker, MN</div>
 		</div>
 		<div class="img">
-			<h4>Title</h4>
-			<p>Details</p>
+			<h4>Hayden Generating Station</h4>
+			<p>MOLTEN SALT ENERGY STORAGE</p>
 			<Slider
-				beforeImg="images/beloit-2013.jpg"
-				afterImg="images/beloit-2022.jpg"
+				beforeImg="images/hayden-2021.jpg"
+				afterImg="images/hayden-2022.jpg"
 			/>
+			<div class="location">Hayden, CO</div>
 		</div>
 		<div class="img">
-			<h4>Title</h4>
-			<p>Details</p>
+			<h4>Beloit Coal Ash Landfill</h4>
+			<p>SOLAR PROJECT</p>
 			<Slider
 				beforeImg="images/beloit-2013.jpg"
 				afterImg="images/beloit-2022.jpg"
 			/>
+			<div class="location">Beloit, WI</div>
 		</div>
 	</div>
 </section>
@@ -61,8 +67,6 @@
 	section {
 		width: 70vw;
 		margin: auto;
-		padding-top: 5vh;
-		padding-bottom: 5vh;
 	}
 
 	.images {
@@ -76,11 +80,24 @@
 	}
 
 	.img {
+		position: relative;
 		flex: 0 32%;
 		margin: auto;
 		min-width: 0;
 		padding-bottom: 18%; /* 32:18, i.e. 16:9 */
 		margin-bottom: 2%; /* (100-32*3)/2 */
+	}
+
+	.location {
+		position: absolute;
+		bottom: 5px;
+		left: 5px;
+		color: #ffe436;
+		font-family: "IBM Plex Mono", monospace;
+		font-size: 0.85rem;
+		font-weight: 800;
+		font-style: italic;
+		text-shadow: 1px 1px 2px black;
 	}
 
 	h4 {
@@ -95,7 +112,7 @@
 		padding: 0;
 		margin: 0;
 		text-align: left;
-		font-family: "Fira Code", monospace;
+		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.85rem;
 		font-weight: 400;
 		text-transform: uppercase;
