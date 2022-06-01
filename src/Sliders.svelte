@@ -1,5 +1,6 @@
 <script>
 	import Slider from "./Slider.svelte";
+	import { tooltip } from "./tooltip";
 </script>
 
 <section>
@@ -7,7 +8,9 @@
 
 	<div class="images">
 		<div class="img">
-			<h4>Mount Tom Station</h4>
+			<h4>
+				Mount Tom Station <span class="info" content="test" use:tooltip>i</span>
+			</h4>
 			<p>SOLAR PROJECT & BATTERY ENERGY STORAGE</p>
 			<Slider
 				beforeImg="images/mount-tom-2014.jpg"
@@ -16,7 +19,7 @@
 			<div class="location">Holyoke, MA</div>
 		</div>
 		<div class="img">
-			<h4>Coal Creek Station</h4>
+			<h4>Coal Creek Station <span class="info">i</span></h4>
 			<p>POTENTIAL WIND, CARBON CAPTURE</p>
 			<Slider
 				beforeImg="images/coal-creek-2021.jpg"
@@ -25,7 +28,7 @@
 			<div class="location">Underwood, ND</div>
 		</div>
 		<div class="img">
-			<h4>Brayton Point Power Plant</h4>
+			<h4>Brayton Point Power Plant <span class="info">i</span></h4>
 			<p>OFFSHORE WIND MANUFACTURING</p>
 			<Slider
 				beforeImg="images/brayton-2018.jpg"
@@ -34,7 +37,7 @@
 			<div class="location">Somerset, MA</div>
 		</div>
 		<div class="img">
-			<h4>Sherburne County Generating Station</h4>
+			<h4>Sherburne County Generating Station <span class="info">i</span></h4>
 			<p>SOLAR PROJECT</p>
 			<Slider
 				beforeImg="images/sherco-2012.jpg"
@@ -43,7 +46,7 @@
 			<div class="location">Becker, MN</div>
 		</div>
 		<div class="img">
-			<h4>Hayden Generating Station</h4>
+			<h4>Hayden Generating Station <span class="info">i</span></h4>
 			<p>MOLTEN SALT ENERGY STORAGE</p>
 			<Slider
 				beforeImg="images/hayden-2021.jpg"
@@ -52,7 +55,7 @@
 			<div class="location">Hayden, CO</div>
 		</div>
 		<div class="img">
-			<h4>Beloit Coal Ash Landfill</h4>
+			<h4>Beloit Coal Ash Landfill <span class="info">i</span></h4>
 			<p>SOLAR PROJECT</p>
 			<Slider
 				beforeImg="images/beloit-2013.jpg"
@@ -92,12 +95,27 @@
 		position: absolute;
 		bottom: 5px;
 		left: 5px;
-		color: #ffe436;
+		color: white;
 		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.85rem;
 		font-weight: 800;
 		font-style: italic;
 		text-shadow: 1px 1px 2px black;
+	}
+
+	.info {
+		color: white;
+		text-align: center;
+		vertical-align: center;
+		width: 1.25rem;
+		height: 1.25rem;
+		font-family: "IBM Plex Mono", monospace;
+		font-size: 1rem;
+		font-weight: 800;
+		background-color: #e76f51;
+		border-radius: 50%;
+		display: inline-block;
+		cursor: pointer;
 	}
 
 	h4 {
